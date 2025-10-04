@@ -68,7 +68,7 @@ export function GettingStartedCard({ onStartTutorial, onDismiss, className }: Ge
       </CardHeader>
       <CardContent className="space-y-4">
         <p className="text-sm text-muted-foreground">
-          Welcome to NASA Farm Game! Learn sustainable farming using real satellite data.
+          Welcome to GeoHarvest! Learn sustainable farming using real satellite data.
         </p>
 
         <div className="flex gap-2">

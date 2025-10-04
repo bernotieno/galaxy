@@ -29,7 +29,7 @@ interface TutorialStep {
 const TUTORIAL_STEPS: TutorialStep[] = [
   {
     id: "welcome",
-    title: "Welcome to NASA Farm Game!",
+    title: "Welcome to GeoHarvest!",
     description: "Learn sustainable farming using real NASA satellite data. This tutorial will guide you through the basics.",
     tip: "Take your time to learn each step - good farming takes patience!"
   },

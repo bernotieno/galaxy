@@ -55,7 +55,7 @@ export function GameHUD({
               <Satellite className="w-5 h-5 text-white" />
             </div>
             <div>
-              <h1 className="text-lg font-bold text-white">NASA Farm Game</h1>
+              <h1 className="text-lg font-bold text-white">GeoHarvest</h1>
               <p className="text-xs text-gray-400">Sustainable Farming Simulator</p>
             </div>
           </div>
