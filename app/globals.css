@@ -1,0 +1,108 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* NASA-themed color palette for GeoHarvest */
+    --background: 220 25% 97%;
+    --foreground: 210 40% 15%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 210 40% 15%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 210 40% 15%;
+
+    /* Deep NASA Blue primary */
+    --primary: 220 60% 25%;
+    --primary-foreground: 210 100% 95%;
+
+    /* Vibrant Yellow accent */
+    --secondary: 45 100% 55%;
+    --secondary-foreground: 220 60% 25%;
+
+    /* Accent Blue for data elements */
+    --accent: 210 85% 55%;
+    --accent-foreground: 210 100% 95%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 210 100% 95%;
+
+    --border: 220 20% 85%;
+    --input: 220 20% 85%;
+    --ring: 210 85% 55%;
+
+    --muted: 220 20% 92%;
+    --muted-foreground: 210 20% 45%;
+
+    --radius: 0.75rem;
+
+    /* Custom GeoHarvest colors */
+    --nasa-blue: 220 60% 25%;
+    --alice-blue: 210 100% 95%;
+    --vibrant-yellow: 45 100% 55%;
+    --success-green: 145 65% 45%;
+  }
+
+  .dark {
+    /* Dark mode with deep space theme */
+    --background: 220 40% 8%;
+    --foreground: 210 100% 95%;
+
+    --card: 220 35% 12%;
+    --card-foreground: 210 100% 95%;
+
+    --popover: 220 35% 12%;
+    --popover-foreground: 210 100% 95%;
+
+    --primary: 210 85% 55%;
+    --primary-foreground: 220 40% 8%;
+
+    --secondary: 45 100% 55%;
+    --secondary-foreground: 220 40% 8%;
+
+    --accent: 210 85% 55%;
+    --accent-foreground: 210 100% 95%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 210 100% 95%;
+
+    --border: 220 30% 20%;
+    --input: 220 30% 20%;
+    --ring: 210 85% 55%;
+
+    --muted: 220 30% 18%;
+    /* Increased lightness from 65% to 85% for better visibility in dark mode */
+    --muted-foreground: 210 30% 85%;
+
+    --nasa-blue: 220 60% 25%;
+    --alice-blue: 210 100% 95%;
+    --vibrant-yellow: 45 100% 55%;
+    --success-green: 145 65% 45%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* Glassmorphism utility classes */
+@layer utilities {
+  .glass {
+    @apply bg-white/10 backdrop-blur-xl border border-white/20;
+  }
+
+  .glass-dark {
+    @apply bg-black/10 backdrop-blur-xl border border-black/20;
+  }
+
+  .text-balance {
+    text-wrap: balance;
+  }
+}
