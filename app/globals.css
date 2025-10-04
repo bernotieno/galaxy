@@ -4,103 +4,61 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  /* Sky blue background */
-  --background: oklch(0.92 0.05 230);
-  --foreground: oklch(0.25 0.02 120);
+  /* Dark Mode Colors as Default */
+  --background: hsl(220, 40%, 8%); /* Deep space dark blue */
+  --foreground: hsl(210, 100%, 95%); /* Alice blue text */
 
-  /* Earth brown cards */
-  --card: oklch(0.95 0.02 60);
-  --card-foreground: oklch(0.25 0.02 120);
+  --card: hsl(220, 35%, 12%); /* Slightly lighter dark blue */
+  --card-foreground: hsl(210, 100%, 95%);
 
-  --popover: oklch(0.98 0.01 60);
-  --popover-foreground: oklch(0.25 0.02 120);
+  --popover: hsl(220, 35%, 12%);
+  --popover-foreground: hsl(210, 100%, 95%);
 
-  /* Green primary (vegetation) */
-  --primary: oklch(0.55 0.15 145);
-  --primary-foreground: oklch(0.98 0.01 145);
+  --primary: hsl(210, 85%, 55%); /* Bright accent blue */
+  --primary-foreground: hsl(210, 100%, 95%);
 
-  /* Warm earth secondary */
-  --secondary: oklch(0.75 0.08 60);
-  --secondary-foreground: oklch(0.25 0.02 60);
+  --secondary: hsl(45, 100%, 55%); /* Vibrant yellow */
+  --secondary-foreground: hsl(220, 40%, 8%); /* Dark background for contrast */
 
-  /* Muted earth tones */
-  --muted: oklch(0.88 0.03 60);
-  --muted-foreground: oklch(0.5 0.02 60);
+  --muted: hsl(220, 35%, 15%);
+  --muted-foreground: hsl(210, 100%, 75%);
 
-  /* Accent - NASA blue */
-  --accent: oklch(0.6 0.18 240);
-  --accent-foreground: oklch(0.98 0.01 240);
+  --accent: hsl(210, 85%, 55%); /* Bright accent blue */
+  --accent-foreground: hsl(210, 100%, 95%);
 
-  --destructive: oklch(0.577 0.245 27.325);
-  --destructive-foreground: oklch(0.98 0.01 27.325);
+  --destructive: hsl(0, 70%, 60%);
+  --destructive-foreground: hsl(210, 100%, 95%);
 
-  --border: oklch(0.82 0.03 60);
-  --input: oklch(0.82 0.03 60);
-  --ring: oklch(0.55 0.15 145);
+  --border: hsl(220, 35%, 20%);
+  --input: hsl(220, 35%, 12%);
+  --ring: hsl(210, 85%, 55%);
 
-  /* Chart colors - earth and vegetation tones */
-  --chart-1: oklch(0.55 0.15 145); /* Green */
-  --chart-2: oklch(0.6 0.18 240); /* Blue */
-  --chart-3: oklch(0.65 0.12 60); /* Brown */
-  --chart-4: oklch(0.75 0.15 90); /* Yellow-green */
-  --chart-5: oklch(0.5 0.1 30); /* Dark brown */
+  /* Chart colors */
+  --chart-1: hsl(145, 65%, 45%); /* Success Green */
+  --chart-2: hsl(210, 85%, 55%); /* Accent Blue */
+  --chart-3: hsl(220, 60%, 25%); /* NASA Blue */
+  --chart-4: hsl(45, 100%, 55%); /* Vibrant Yellow */
+  --chart-5: hsl(280, 70%, 60%); /* Purple */
 
-  --radius: 0.5rem;
+  --radius: 0.75rem;
 
-  --sidebar: oklch(0.95 0.02 60);
-  --sidebar-foreground: oklch(0.25 0.02 120);
-  --sidebar-primary: oklch(0.55 0.15 145);
-  --sidebar-primary-foreground: oklch(0.98 0.01 145);
-  --sidebar-accent: oklch(0.88 0.03 60);
-  --sidebar-accent-foreground: oklch(0.25 0.02 60);
-  --sidebar-border: oklch(0.82 0.03 60);
-  --sidebar-ring: oklch(0.55 0.15 145);
+  --sidebar: hsl(220, 35%, 10%);
+  --sidebar-foreground: hsl(210, 100%, 95%);
+  --sidebar-primary: hsl(210, 85%, 55%);
+  --sidebar-primary-foreground: hsl(210, 100%, 95%);
+  --sidebar-accent: hsl(45, 100%, 20%);
+  --sidebar-accent-foreground: hsl(210, 100%, 95%);
+  --sidebar-border: hsl(220, 35%, 20%);
+  --sidebar-ring: hsl(210, 85%, 55%);
+
+  /* Brand Colors */
+  --nasa-blue: hsl(220, 60%, 25%);
+  --vibrant-yellow: hsl(45, 100%, 55%);
+  --accent-blue: hsl(210, 85%, 55%);
+  --success-green: hsl(145, 65%, 45%);
+  --alice-blue: hsl(210, 100%, 95%);
 }
 
-.dark {
-  --background: oklch(0.18 0.01 120);
-  --foreground: oklch(0.95 0.01 120);
-
-  --card: oklch(0.22 0.01 120);
-  --card-foreground: oklch(0.95 0.01 120);
-
-  --popover: oklch(0.2 0.01 120);
-  --popover-foreground: oklch(0.95 0.01 120);
-
-  --primary: oklch(0.65 0.15 145);
-  --primary-foreground: oklch(0.18 0.01 145);
-
-  --secondary: oklch(0.3 0.02 60);
-  --secondary-foreground: oklch(0.95 0.01 60);
-
-  --muted: oklch(0.28 0.01 120);
-  --muted-foreground: oklch(0.65 0.01 120);
-
-  --accent: oklch(0.55 0.18 240);
-  --accent-foreground: oklch(0.95 0.01 240);
-
-  --destructive: oklch(0.5 0.2 27.325);
-  --destructive-foreground: oklch(0.95 0.01 27.325);
-
-  --border: oklch(0.3 0.01 120);
-  --input: oklch(0.3 0.01 120);
-  --ring: oklch(0.65 0.15 145);
-
-  --chart-1: oklch(0.65 0.15 145);
-  --chart-2: oklch(0.6 0.18 240);
-  --chart-3: oklch(0.55 0.12 60);
-  --chart-4: oklch(0.7 0.15 90);
-  --chart-5: oklch(0.45 0.1 30);
-
-  --sidebar: oklch(0.2 0.01 120);
-  --sidebar-foreground: oklch(0.95 0.01 120);
-  --sidebar-primary: oklch(0.65 0.15 145);
-  --sidebar-primary-foreground: oklch(0.18 0.01 145);
-  --sidebar-accent: oklch(0.28 0.01 120);
-  --sidebar-accent-foreground: oklch(0.95 0.01 120);
-  --sidebar-border: oklch(0.3 0.01 120);
-  --sidebar-ring: oklch(0.65 0.15 145);
-}
 
 @theme inline {
   --font-sans: var(--font-geist-sans);
@@ -141,6 +99,13 @@
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
+
+  /* Brand Colors */
+  --color-nasa-blue: var(--nasa-blue);
+  --color-vibrant-yellow: var(--vibrant-yellow);
+  --color-accent-blue: var(--accent-blue);
+  --color-success-green: var(--success-green);
+  --color-alice-blue: var(--alice-blue);
 }
 
 @layer base {
@@ -149,5 +114,122 @@
   }
   body {
     @apply bg-background text-foreground;
+    background:
+      radial-gradient(circle at 25% 25%, hsl(220, 60%, 25%, 0.15) 0%, transparent 40%),
+      radial-gradient(circle at 75% 75%, hsl(45, 100%, 55%, 0.08) 0%, transparent 35%),
+      radial-gradient(circle at 50% 10%, hsl(210, 85%, 55%, 0.1) 0%, transparent 50%),
+      linear-gradient(135deg, hsl(220, 40%, 8%) 0%, hsl(220, 35%, 12%) 50%, hsl(220, 40%, 8%) 100%);
+    background-size: 100% 100%, 80% 80%, 60% 60%, 100% 100%;
+    background-attachment: fixed;
+    min-height: 100vh;
+  }
+  
+  /* Game-style scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    background: oklch(0.2 0.02 240);
+    border-radius: 4px;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, oklch(0.6 0.2 200), oklch(0.5 0.15 220));
+    border-radius: 4px;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(180deg, oklch(0.7 0.25 200), oklch(0.6 0.2 220));
+  }
+  
+  /* Game-style selection */
+  ::selection {
+    background: oklch(0.6 0.2 200 / 0.3);
+    color: oklch(0.95 0.01 120);
+  }
+  
+  /* Smooth animations for game elements */
+  .game-element {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .game-hover:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
+  }
+  
+  /* Themed glow effects */
+  .glow-nasa-blue {
+    box-shadow: 0 0 30px hsl(220, 60%, 25%, 0.4), 0 0 60px hsl(220, 60%, 25%, 0.2);
+  }
+
+  .glow-accent-blue {
+    box-shadow: 0 0 25px hsl(210, 85%, 55%, 0.4), 0 0 50px hsl(210, 85%, 55%, 0.2);
+  }
+
+  .glow-yellow {
+    box-shadow: 0 0 25px hsl(45, 100%, 55%, 0.4), 0 0 50px hsl(45, 100%, 55%, 0.2);
+  }
+
+  .glow-green {
+    box-shadow: 0 0 20px hsl(145, 65%, 45%, 0.3);
+  }
+
+  /* Glassmorphism effects */
+  .glass-card {
+    background: hsl(220, 60%, 25%, 0.1);
+    backdrop-filter: blur(20px);
+    border: 1px solid hsl(210, 100%, 95%, 0.1);
+    box-shadow: 0 8px 32px hsl(220, 40%, 8%, 0.3);
+  }
+
+  .glass-panel {
+    background: hsl(210, 100%, 95%, 0.05);
+    backdrop-filter: blur(16px);
+    border: 1px solid hsl(210, 100%, 95%, 0.08);
+    box-shadow: 0 4px 24px hsl(220, 40%, 8%, 0.2);
+  }
+
+  .glass-button {
+    background: hsl(220, 60%, 25%, 0.2);
+    backdrop-filter: blur(12px);
+    border: 1px solid hsl(220, 60%, 25%, 0.3);
+    transition: all 0.3s ease;
+  }
+
+  .glass-button:hover {
+    background: hsl(220, 60%, 25%, 0.3);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px hsl(220, 60%, 25%, 0.3);
+  }
+
+  .glass-yellow {
+    background: hsl(45, 100%, 55%, 0.15);
+    backdrop-filter: blur(16px);
+    border: 1px solid hsl(45, 100%, 55%, 0.2);
+  }
+
+  /* Mission Control aesthetic */
+  .mission-control-panel {
+    background:
+      linear-gradient(135deg, hsl(220, 60%, 25%, 0.08) 0%, hsl(220, 60%, 25%, 0.12) 100%),
+      hsl(220, 40%, 8%, 0.2);
+    backdrop-filter: blur(20px);
+    border: 1px solid hsl(220, 60%, 25%, 0.2);
+    box-shadow:
+      0 8px 32px hsl(220, 40%, 8%, 0.3),
+      inset 0 1px 0 hsl(210, 100%, 95%, 0.1);
+  }
+
+  /* Days counter styling */
+  .days-counter {
+    background: linear-gradient(135deg, hsl(220, 60%, 25%, 0.2) 0%, hsl(45, 100%, 55%, 0.1) 100%);
+    backdrop-filter: blur(12px);
+    border: 2px solid hsl(220, 60%, 25%, 0.3);
+    box-shadow: 0 0 20px hsl(220, 60%, 25%, 0.2);
+    font-family: 'Courier New', monospace;
+    font-weight: bold;
+    letter-spacing: 1px;
   }
 }

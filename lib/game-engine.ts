@@ -1,6 +1,6 @@
 // Farm Game Engine - Core game logic and state management
 
-import { CROP_DATA, type CropType, type FarmCell, type GameState, type Crop, type CropStage } from "./game-types"
+import { CROP_DATA, FARM_LOCATIONS, type CropType, type FarmCell, type GameState, type Crop, type CropStage, type FarmLocation } from "./game-types"
 import { generateMockSoilMoisture, generateMockNDVI, generateMockWeather, nasaAPI } from "./nasa-api"
 
 export class FarmGameEngine {
@@ -12,7 +12,10 @@ export class FarmGameEngine {
 
     // Update to current date on client-side only
     if (typeof window !== 'undefined') {
-      this.state.currentDate = new Date()
+      const now = new Date()
+      this.state.currentDate = now
+      this.state.startDate = now
+      this.state.daysElapsed = 0
     }
   }
 
@@ -45,11 +48,9 @@ export class FarmGameEngine {
     return {
       farmGrid: grid,
       currentDate: fixedDate,
-      farmLocation: {
-        latitude: 40.7128,
-        longitude: -74.006,
-        bbox: "-74.1,40.6,-73.9,40.8",
-      },
+      startDate: fixedDate,
+      daysElapsed: 0,
+      farmLocation: FARM_LOCATIONS['iowa-corn-belt'], // Default to Iowa Corn Belt
       resources: {
         water: 1000,
         fertilizer: 500,
@@ -214,6 +215,7 @@ export class FarmGameEngine {
   // Advance game by one day
   advanceDay() {
     this.state.currentDate = new Date(this.state.currentDate.getTime() + 24 * 60 * 60 * 1000)
+    this.state.daysElapsed = Math.floor((this.state.currentDate.getTime() - this.state.startDate.getTime()) / (24 * 60 * 60 * 1000))
 
     // Update all crops
     this.state.farmGrid.forEach((row) => {
@@ -470,6 +472,53 @@ export class FarmGameEngine {
       }
 
       this.notifyListeners()
+    }
+  }
+
+  // Change farm location
+  changeFarmLocation(locationId: string): boolean {
+    const location = FARM_LOCATIONS[locationId]
+    if (!location) {
+      console.error(`Location ${locationId} not found`)
+      return false
+    }
+
+    this.state.farmLocation = location
+
+    // Update weather based on new location's climate
+    this.adjustWeatherForClimate(location.climate)
+
+    // Trigger NASA data update for new location
+    this.updateWithNASAData()
+
+    this.notifyListeners()
+    return true
+  }
+
+  // Get all available locations
+  getAvailableLocations(): FarmLocation[] {
+    return Object.values(FARM_LOCATIONS)
+  }
+
+  // Adjust weather based on climate type
+  private adjustWeatherForClimate(climate: FarmLocation['climate']) {
+    switch (climate) {
+      case 'tropical':
+        this.state.weather.temperature = 25 + Math.random() * 10 // 25-35°C
+        break
+      case 'arid':
+        this.state.weather.temperature = 20 + Math.random() * 20 // 20-40°C
+        this.state.weather.precipitation = Math.random() * 5 // Very low
+        break
+      case 'temperate':
+        this.state.weather.temperature = 15 + Math.random() * 15 // 15-30°C
+        break
+      case 'continental':
+        this.state.weather.temperature = 10 + Math.random() * 20 // 10-30°C
+        break
+      case 'mediterranean':
+        this.state.weather.temperature = 18 + Math.random() * 12 // 18-30°C
+        break
     }
   }
 

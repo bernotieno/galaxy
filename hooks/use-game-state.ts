@@ -23,5 +23,7 @@ export function useGameState() {
     harvestCrop: gameEngine.harvestCrop.bind(gameEngine),
     advanceDay: gameEngine.advanceDay.bind(gameEngine),
     updateWithNASAData: gameEngine.updateWithNASAData.bind(gameEngine),
+    changeFarmLocation: gameEngine.changeFarmLocation.bind(gameEngine),
+    getAvailableLocations: gameEngine.getAvailableLocations.bind(gameEngine),
   }
 }

@@ -1,10 +1,12 @@
 "use client"
 
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { useState, useEffect } from "react"
+import { GameCard, GameCardContent, GameCardHeader, GameCardTitle } from "@/components/ui/game-card"
 import { Progress } from "@/components/ui/progress"
+import { Badge } from "@/components/ui/badge"
 import { HelpTooltip } from "@/components/help-tooltip"
 import type { GameState } from "@/lib/game-types"
-import { Droplets, Sparkles, Sprout, DollarSign, Leaf, TrendingUp, Award } from "lucide-react"
+import { Droplets, Sparkles, Sprout, DollarSign, Leaf, TrendingUp, Award, Zap, AlertTriangle } from "lucide-react"
 
 interface ResourcePanelProps {
   gameState: GameState
@@ -12,139 +14,123 @@ interface ResourcePanelProps {
 
 export function ResourcePanel({ gameState }: ResourcePanelProps) {
   const { resources, score } = gameState
+  const [animatedResources, setAnimatedResources] = useState<string[]>([])
+  const [previousResources, setPreviousResources] = useState(resources)
 
   const totalSeeds = Object.values(resources.seeds).reduce((sum, count) => sum + count, 0)
+
+  // Detect resource changes and trigger animations
+  useEffect(() => {
+    const changes: string[] = []
+    if (resources.money !== previousResources.money) changes.push('money')
+    if (resources.water !== previousResources.water) changes.push('water')
+    if (resources.fertilizer !== previousResources.fertilizer) changes.push('fertilizer')
+    
+    if (changes.length > 0) {
+      setAnimatedResources(changes)
+      setTimeout(() => setAnimatedResources([]), 1000)
+    }
+    
+    setPreviousResources(resources)
+  }, [resources, previousResources])
+
+  const getResourceStatus = (current: number, max: number) => {
+    const percentage = (current / max) * 100
+    if (percentage < 20) return { status: 'critical', color: 'text-red-500', bgColor: 'bg-red-500' }
+    if (percentage < 50) return { status: 'low', color: 'text-amber-500', bgColor: 'bg-amber-500' }
+    return { status: 'good', color: 'text-green-500', bgColor: 'bg-green-500' }
+  }
 
   return (
     <div className="space-y-4">
       {/* Resources */}
-      <Card>
-        <CardHeader>
-          <CardTitle className="text-lg">Resources</CardTitle>
-        </CardHeader>
-        <CardContent className="space-y-4">
-          <div className="space-y-2">
-            <div className="flex items-center justify-between text-sm">
-              <span className="flex items-center gap-2">
-                <Droplets className="w-4 h-4 text-blue-500" />
-                Water
-                <HelpTooltip content="Water is used to irrigate crops. Each irrigation costs 10L. Good soil moisture helps crops grow healthy." />
-              </span>
-              <span className="font-bold">{resources.water}L</span>
+      <GameCard variant="default">
+        <GameCardHeader>
+          <GameCardTitle className="flex items-center gap-2">
+            <Sprout className="w-5 h-5 text-green-600" />
+            Resources
+          </GameCardTitle>
+        </GameCardHeader>
+        <GameCardContent className="space-y-3">
+          <div className="flex items-center justify-between p-3 border border-blue-200 rounded-lg bg-blue-50">
+            <div className="flex items-center gap-2">
+              <Droplets className="w-4 h-4 text-blue-600" />
+              <span className="text-sm font-medium text-blue-800">Water</span>
             </div>
-            <Progress value={(resources.water / 2000) * 100} className="h-2" />
+            <span className="font-bold text-blue-900">{resources.water}L</span>
           </div>
 
-          <div className="space-y-2">
-            <div className="flex items-center justify-between text-sm">
-              <span className="flex items-center gap-2">
-                <Sparkles className="w-4 h-4 text-green-500" />
-                Fertilizer
-                <HelpTooltip content="Fertilizer boosts crop growth and health. Each application costs 5kg. Use wisely - overuse hurts sustainability!" />
-              </span>
-              <span className="font-bold">{resources.fertilizer}kg</span>
+          <div className="flex items-center justify-between p-3 border border-green-200 rounded-lg bg-green-50">
+            <div className="flex items-center gap-2">
+              <Sparkles className="w-4 h-4 text-green-600" />
+              <span className="text-sm font-medium text-green-800">Fertilizer</span>
             </div>
-            <Progress value={(resources.fertilizer / 1000) * 100} className="h-2" />
+            <span className="font-bold text-green-900">{resources.fertilizer}kg</span>
           </div>
 
-          <div className="space-y-2">
-            <div className="flex items-center justify-between text-sm">
-              <span className="flex items-center gap-2">
-                <Sprout className="w-4 h-4 text-amber-500" />
-                Seeds
-                <HelpTooltip content="Seeds are needed to plant crops. Different crops have different growth times and requirements. Check crop details before planting!" />
-              </span>
-              <span className="font-bold">{totalSeeds}</span>
+          <div className="p-3 border border-teal-200 rounded-lg bg-teal-50">
+            <div className="flex items-center justify-between mb-2">
+              <div className="flex items-center gap-2">
+                <Sprout className="w-4 h-4 text-teal-600" />
+                <span className="text-sm font-medium text-teal-800">Seeds</span>
+              </div>
+              <span className="font-bold text-teal-900">{totalSeeds}</span>
             </div>
             <div className="grid grid-cols-5 gap-1 text-xs">
               {Object.entries(resources.seeds).map(([crop, count]) => (
-                <div key={crop} className="text-center">
-                  <div className="font-medium">{count}</div>
-                  <div className="text-muted-foreground capitalize">{crop.slice(0, 3)}</div>
+                <div key={crop} className="text-center p-1 bg-white rounded border border-teal-100">
+                  <div className="font-bold text-teal-800">{count}</div>
+                  <div className="text-teal-600 capitalize">{crop.slice(0, 3)}</div>
                 </div>
               ))}
             </div>
           </div>
 
-          <div className="pt-2 border-t">
-            <div className="flex items-center justify-between">
-              <span className="flex items-center gap-2 text-sm">
-                <DollarSign className="w-4 h-4 text-emerald-500" />
-                Money
-              </span>
-              <span className="text-xl font-bold">${resources.money.toLocaleString()}</span>
+          <div className="flex items-center justify-between p-3 border border-green-300 rounded-lg bg-gradient-to-r from-green-100 to-green-50">
+            <div className="flex items-center gap-2">
+              <DollarSign className="w-5 h-5 text-green-600" />
+              <span className="text-sm font-medium text-green-800">Money</span>
             </div>
-          </div>
-        </CardContent>
-      </Card>
-
-      {/* Score */}
-      <Card>
-        <CardHeader>
-          <CardTitle className="text-lg flex items-center gap-2">
-            <Award className="w-5 h-5" />
-            Performance
-          </CardTitle>
-        </CardHeader>
-        <CardContent className="space-y-4">
-          <div className="space-y-2">
-            <div className="flex items-center justify-between text-sm">
-              <span className="flex items-center gap-2">
-                <Leaf className="w-4 h-4 text-green-600" />
-                Sustainability
-                <HelpTooltip content="Measures your environmental impact. Efficient water/fertilizer use, crop diversity, and soil health increase this score." />
-              </span>
-              <span className="font-bold">{Math.floor(score.sustainability)}</span>
-            </div>
-            <Progress value={score.sustainability} className="h-2" />
-          </div>
-
-          <div className="space-y-2">
-            <div className="flex items-center justify-between text-sm">
-              <span className="flex items-center gap-2">
-                <TrendingUp className="w-4 h-4 text-blue-600" />
-                Efficiency
-              </span>
-              <span className="font-bold">{Math.floor(score.efficiency)}</span>
-            </div>
-            <Progress value={score.efficiency} className="h-2" />
-          </div>
-
-          <div className="pt-2 border-t">
-            <div className="flex items-center justify-between">
-              <span className="text-sm text-muted-foreground">Total Crop Yield</span>
-              <span className="text-lg font-bold">{score.cropYield.toLocaleString()}</span>
-            </div>
-          </div>
-        </CardContent>
-      </Card>
-
-      {/* Game Info */}
-      <Card>
-        <CardHeader>
-          <CardTitle className="text-lg">Farm Status</CardTitle>
-        </CardHeader>
-        <CardContent className="space-y-2 text-sm">
-          <div className="flex justify-between">
-            <span className="text-muted-foreground">Date</span>
-            <span className="font-medium">{gameState.currentDate.toLocaleDateString()}</span>
-          </div>
-          <div className="flex justify-between">
-            <span className="text-muted-foreground">Temperature</span>
-            <span className="font-medium">{Math.floor(gameState.weather.temperature)}°C</span>
-          </div>
-          <div className="flex justify-between">
-            <span className="text-muted-foreground">Precipitation</span>
-            <span className="font-medium">{gameState.weather.precipitation.toFixed(1)}mm</span>
-          </div>
-          <div className="flex justify-between">
-            <span className="text-muted-foreground">Location</span>
-            <span className="font-medium text-xs">
-              {gameState.farmLocation.latitude.toFixed(2)}°, {gameState.farmLocation.longitude.toFixed(2)}°
+            <span className="text-lg font-bold text-green-900">
+              ${resources.money.toLocaleString()}
             </span>
           </div>
-        </CardContent>
-      </Card>
+        </GameCardContent>
+      </GameCard>
+
+      {/* Score */}
+      <GameCard variant="default">
+        <GameCardHeader>
+          <GameCardTitle className="flex items-center gap-2">
+            <Award className="w-5 h-5 text-blue-600" />
+            Performance
+          </GameCardTitle>
+        </GameCardHeader>
+        <GameCardContent className="space-y-3">
+          <div className="flex items-center justify-between p-3 border border-green-200 rounded-lg bg-green-50">
+            <div className="flex items-center gap-2">
+              <Leaf className="w-4 h-4 text-green-600" />
+              <span className="text-sm font-medium text-green-800">Sustainability</span>
+            </div>
+            <span className="font-bold text-green-900">{Math.floor(score.sustainability)}%</span>
+          </div>
+          
+          <div className="flex items-center justify-between p-3 border border-blue-200 rounded-lg bg-blue-50">
+            <div className="flex items-center gap-2">
+              <TrendingUp className="w-4 h-4 text-blue-600" />
+              <span className="text-sm font-medium text-blue-800">Efficiency</span>
+            </div>
+            <span className="font-bold text-blue-900">{Math.floor(score.efficiency)}%</span>
+          </div>
+
+          <div className="flex items-center justify-between p-3 border border-teal-200 rounded-lg bg-gradient-to-r from-teal-100 to-blue-50">
+            <span className="text-sm font-medium text-teal-800">Total Harvest</span>
+            <span className="font-bold text-teal-900">
+              {score.cropYield.toLocaleString()}
+            </span>
+          </div>
+        </GameCardContent>
+      </GameCard>
     </div>
   )
 }
