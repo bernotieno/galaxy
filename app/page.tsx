@@ -88,10 +88,10 @@ export default function GeoHarvestLanding() {
           </nav>
 
           <div className="hidden md:flex gap-4 items-center">
-            <Button variant="ghost" size="icon" onClick={toggleTheme} className="rounded-full">
+            {/* <Button variant="ghost" size="icon" onClick={toggleTheme} className="rounded-full">
               {mounted && theme === "dark" ? <Sun className="size-[18px]" /> : <Moon className="size-[18px]" />}
               <span className="sr-only">Toggle theme</span>
-            </Button>
+            </Button> */}
             <Button className="rounded-full bg-[hsl(45,100%,55%)] text-[hsl(220,40%,8%)] hover:bg-[hsl(45,100%,50%)] font-bold shadow-lg">
               <Gamepad2 className="size-4 mr-2" />
               Play Now
@@ -151,9 +151,9 @@ export default function GeoHarvestLanding() {
         {/* Hero Section */}
         <section className="relative w-full py-20 md:py-32 lg:py-40 overflow-hidden">
           {/* Animated background */}
-          <div className="absolute inset-0 opacity-20">
+          <div className="absolute inset-0 opacity-40">
             <div className="absolute inset-0 bg-[url('/farm-field-aerial-view.jpg')] bg-cover bg-center" />
-            <div className="absolute inset-0 bg-gradient-to-b from-background via-transparent to-background" />
+            <div className="absolute inset-0 bg-gradient-to-b from-background/80 via-transparent to-background/80" />
           </div>
 
           <div className="container px-4 md:px-6 relative z-10">
@@ -163,7 +163,7 @@ export default function GeoHarvestLanding() {
               transition={{ duration: 0.8 }}
               className="text-center max-w-4xl mx-auto"
             >
-              <Badge className="mb-6 bg-accent/20 text-accent border-accent/30 text-sm px-4 py-1">
+              <Badge className="mb-6 bg-white/0 text-white/50 border-white/30 text-sm px-4 py-1">
                 <Zap className="size-3 mr-1" />
                 FREE TO PLAY • NASA-POWERED
               </Badge>
@@ -182,13 +182,13 @@ export default function GeoHarvestLanding() {
                   <Gamepad2 className="size-5 mr-2" />
                   START PLAYING NOW
                 </Button>
-                <Button
+                {/* <Button
                   size="lg"
                   variant="outline"
                   className="rounded-full h-14 px-10 text-lg font-semibold bg-transparent"
                 >
                   Watch Trailer
-                </Button>
+                </Button> */}
               </div>
             </motion.div>
 
@@ -207,9 +207,9 @@ export default function GeoHarvestLanding() {
                   <Star className="size-6 text-[hsl(45,100%,55%)]" />
                 </div>
                 <div className="grid md:grid-cols-3 gap-6">
-                  <div className="text-center p-6 rounded-xl bg-accent/10 border border-accent/20 hover:scale-105 transition-transform">
-                    <Trophy className="size-12 text-accent mx-auto mb-3" />
-                    <div className="text-4xl font-bold text-accent mb-2">50+</div>
+                  <div className="text-center p-6 rounded-xl bg-accent/10 border border-accent hover:scale-105 transition-transform">
+                    <Trophy className="size-12  mx-auto mb-3" />
+                    <div className="text-4xl font-bold  mb-2">50+</div>
                     <div className="text-sm font-semibold text-foreground">Achievements to Unlock</div>
                     <div className="text-xs text-muted-foreground mt-1">Master Farmer, Eco Warrior & More</div>
                   </div>
@@ -273,7 +273,7 @@ export default function GeoHarvestLanding() {
                   icon: <Trophy className="size-8" />,
                   description:
                     "Harvest crops, earn coins, and boost your Sustainability Score. Unlock achievements and climb the global leaderboard!",
-                  color: "hsl(45,100%,55%)",
+                  color: "white",
                   badge: "STEP 3",
                 },
               ].map((item, i) => (
@@ -286,7 +286,7 @@ export default function GeoHarvestLanding() {
                 >
                   <Card className="h-full glass hover:border-muted transition-all hover:scale-105">
                     <CardContent className="p-8 flex flex-col items-center text-center relative">
-                      <Badge className="absolute top-4 right-4 bg-accent/20 text-accent border-accent/30 text-xs">
+                      <Badge className="absolute top-4 right-4 bg-white/0 text-white/30 border-white/30 text-xs">
                         {item.badge}
                       </Badge>
                       <div
@@ -315,7 +315,7 @@ export default function GeoHarvestLanding() {
               viewport={{ once: true }}
               className="text-center mb-16"
             >
-              <Badge className="mb-4 bg-accent/20 text-accent border-accent/30">DAILY CHALLENGES</Badge>
+              <Badge className="mb-4 bg-white/0 text-white/30 border-white/30">DAILY CHALLENGES</Badge>
               <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4 font-[family-name:var(--font-poppins)]">
                 Complete Epic Missions
               </h2>
@@ -414,15 +414,15 @@ export default function GeoHarvestLanding() {
                       </p>
                       <Badge className="bg-[hsl(145,65%,45%)]/20 text-[hsl(145,65%,45%)] border-0">+2000 XP</Badge>
                     </div>
-                    <div className="bg-accent/10 rounded-xl p-6 border border-accent/20 hover:scale-105 transition-transform">
+                    <div className="bg-accent/10 rounded-xl p-6 border border hover:scale-105 transition-transform">
                       <div className="flex items-center gap-3 mb-3">
-                        <TrendingUp className="size-6 text-accent" />
-                        <h4 className="text-xl font-bold text-accent">Carbon Neutral</h4>
+                        <TrendingUp className="size-6 " />
+                        <h4 className="text-xl font-bold ">Carbon Neutral</h4>
                       </div>
                       <p className="text-muted-foreground mb-3">
                         Reduce your farm's carbon footprint to zero and earn the ultimate achievement!
                       </p>
-                      <Badge className="bg-accent/20 text-accent border-0">+5000 XP</Badge>
+                      <Badge className="bg-accent/20 text-white border-white/30">+5000 XP</Badge>
                     </div>
                   </div>
                   <p className="text-center text-muted-foreground italic">
@@ -470,7 +470,7 @@ export default function GeoHarvestLanding() {
                       <CardContent className="p-6 text-center">
                         <div className="text-3xl font-bold mb-2">{player.rank}</div>
                         <div className="text-lg font-bold text-foreground mb-1">{player.name}</div>
-                        <Badge className="mb-3 bg-accent/20 text-accent border-accent/30">{player.badge}</Badge>
+                        <Badge className="mb-3 bg-accent/0 text-white/30 border-white/30">{player.badge}</Badge>
                         <div className="text-2xl font-bold text-[hsl(45,100%,55%)]">{player.score} pts</div>
                       </CardContent>
                     </Card>
@@ -491,12 +491,12 @@ export default function GeoHarvestLanding() {
             >
               <div className="text-center mb-12">
                 <GraduationCap className="size-16 text-[hsl(45,100%,55%)] mx-auto mb-6" />
-                <Badge className="mb-4 bg-accent/20 text-accent border-accent/30">LEARN WHILE YOU PLAY</Badge>
+                <Badge className="mb-4 bg-accent/20 text-white/30 border-white/30">LEARN WHILE YOU PLAY</Badge>
                 <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-6 font-[family-name:var(--font-poppins)]">
                   Level Up Your Brain Too!
                 </h2>
                 <p className="text-lg text-muted-foreground leading-relaxed">
-                  GeoHarvest isn't just fun—it's educational! Learn real climate science, data analysis, and sustainable
+                  GeoHarvest isn't just fun;it's educational! Learn real climate science, data analysis, and sustainable
                   farming while you play.
                 </p>
               </div>
