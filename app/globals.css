@@ -4,59 +4,59 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  /* Dark Mode Colors as Default */
-  --background: hsl(220, 40%, 8%); /* Deep space dark blue */
-  --foreground: hsl(210, 100%, 95%); /* Alice blue text */
+  /* Gaming Black Theme - 3 Bright Colors */
+  --background: hsl(0, 0%, 0%); /* Pure black */
+  --foreground: hsl(0, 0%, 100%); /* Pure white text */
 
-  --card: hsl(220, 35%, 12%); /* Slightly lighter dark blue */
-  --card-foreground: hsl(210, 100%, 95%);
+  --card: hsl(0, 0%, 8%); /* Very dark gray */
+  --card-foreground: hsl(0, 0%, 95%);
 
-  --popover: hsl(220, 35%, 12%);
-  --popover-foreground: hsl(210, 100%, 95%);
+  --popover: hsl(0, 0%, 8%);
+  --popover-foreground: hsl(0, 0%, 95%);
 
-  --primary: hsl(210, 85%, 55%); /* Bright accent blue */
-  --primary-foreground: hsl(210, 100%, 95%);
+  --primary: hsl(195, 60%, 45%); /* Muted Cyan */
+  --primary-foreground: hsl(0, 0%, 100%);
 
-  --secondary: hsl(45, 100%, 55%); /* Vibrant yellow */
-  --secondary-foreground: hsl(220, 40%, 8%); /* Dark background for contrast */
+  --secondary: hsl(60, 70%, 50%); /* Softer Yellow */
+  --secondary-foreground: hsl(0, 0%, 0%);
 
-  --muted: hsl(220, 35%, 15%);
-  --muted-foreground: hsl(210, 100%, 75%);
+  --muted: hsl(0, 0%, 12%);
+  --muted-foreground: hsl(0, 0%, 70%);
 
-  --accent: hsl(210, 85%, 55%); /* Bright accent blue */
-  --accent-foreground: hsl(210, 100%, 95%);
+  --accent: hsl(120, 60%, 45%); /* Muted Green */
+  --accent-foreground: hsl(0, 0%, 100%);
 
-  --destructive: hsl(0, 70%, 60%);
-  --destructive-foreground: hsl(210, 100%, 95%);
+  --destructive: hsl(0, 100%, 50%); /* Bright Red */
+  --destructive-foreground: hsl(0, 0%, 100%);
 
-  --border: hsl(220, 35%, 20%);
-  --input: hsl(220, 35%, 12%);
-  --ring: hsl(210, 85%, 55%);
+  --border: hsl(0, 0%, 25%);
+  --input: hsl(0, 0%, 8%);
+  --ring: hsl(195, 100%, 50%);
 
-  /* Chart colors */
-  --chart-1: hsl(145, 65%, 45%); /* Success Green */
-  --chart-2: hsl(210, 85%, 55%); /* Accent Blue */
-  --chart-3: hsl(220, 60%, 25%); /* NASA Blue */
-  --chart-4: hsl(45, 100%, 55%); /* Vibrant Yellow */
-  --chart-5: hsl(280, 70%, 60%); /* Purple */
+  /* Gaming Colors - 3 Main Muted Colors */
+  --chart-1: hsl(120, 60%, 45%); /* Muted Green */
+  --chart-2: hsl(195, 60%, 45%); /* Muted Cyan */
+  --chart-3: hsl(60, 70%, 50%); /* Softer Yellow */
+  --chart-4: hsl(280, 60%, 55%); /* Softer Purple */
+  --chart-5: hsl(0, 70%, 50%); /* Softer Red */
 
   --radius: 0.75rem;
 
-  --sidebar: hsl(220, 35%, 10%);
-  --sidebar-foreground: hsl(210, 100%, 95%);
-  --sidebar-primary: hsl(210, 85%, 55%);
-  --sidebar-primary-foreground: hsl(210, 100%, 95%);
-  --sidebar-accent: hsl(45, 100%, 20%);
-  --sidebar-accent-foreground: hsl(210, 100%, 95%);
-  --sidebar-border: hsl(220, 35%, 20%);
-  --sidebar-ring: hsl(210, 85%, 55%);
+  --sidebar: hsl(0, 0%, 5%);
+  --sidebar-foreground: hsl(0, 0%, 95%);
+  --sidebar-primary: hsl(195, 100%, 50%);
+  --sidebar-primary-foreground: hsl(0, 0%, 0%);
+  --sidebar-accent: hsl(60, 100%, 50%);
+  --sidebar-accent-foreground: hsl(0, 0%, 0%);
+  --sidebar-border: hsl(0, 0%, 25%);
+  --sidebar-ring: hsl(195, 100%, 50%);
 
-  /* Brand Colors */
-  --nasa-blue: hsl(220, 60%, 25%);
-  --vibrant-yellow: hsl(45, 100%, 55%);
-  --accent-blue: hsl(210, 85%, 55%);
-  --success-green: hsl(145, 65%, 45%);
-  --alice-blue: hsl(210, 100%, 95%);
+  /* Gaming Brand Colors - 3 Main Muted Colors */
+  --gaming-cyan: hsl(195, 60%, 45%);
+  --gaming-yellow: hsl(60, 70%, 50%);
+  --gaming-green: hsl(120, 60%, 45%);
+  --gaming-purple: hsl(280, 60%, 55%);
+  --gaming-red: hsl(0, 70%, 50%);
 }
 
 
@@ -100,12 +100,12 @@
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
 
-  /* Brand Colors */
-  --color-nasa-blue: var(--nasa-blue);
-  --color-vibrant-yellow: var(--vibrant-yellow);
-  --color-accent-blue: var(--accent-blue);
-  --color-success-green: var(--success-green);
-  --color-alice-blue: var(--alice-blue);
+  /* Gaming Brand Colors */
+  --color-gaming-cyan: var(--gaming-cyan);
+  --color-gaming-yellow: var(--gaming-yellow);
+  --color-gaming-green: var(--gaming-green);
+  --color-gaming-purple: var(--gaming-purple);
+  --color-gaming-red: var(--gaming-red);
 }
 
 @layer base {
@@ -114,13 +114,7 @@
   }
   body {
     @apply bg-background text-foreground;
-    background:
-      radial-gradient(circle at 25% 25%, hsl(220, 60%, 25%, 0.15) 0%, transparent 40%),
-      radial-gradient(circle at 75% 75%, hsl(45, 100%, 55%, 0.08) 0%, transparent 35%),
-      radial-gradient(circle at 50% 10%, hsl(210, 85%, 55%, 0.1) 0%, transparent 50%),
-      linear-gradient(135deg, hsl(220, 40%, 8%) 0%, hsl(220, 35%, 12%) 50%, hsl(220, 40%, 8%) 100%);
-    background-size: 100% 100%, 80% 80%, 60% 60%, 100% 100%;
-    background-attachment: fixed;
+    background: hsl(0, 0%, 0%);
     min-height: 100vh;
   }
   
@@ -159,55 +153,89 @@
     box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
   }
   
-  /* Themed glow effects */
-  .glow-nasa-blue {
-    box-shadow: 0 0 30px hsl(220, 60%, 25%, 0.4), 0 0 60px hsl(220, 60%, 25%, 0.2);
-  }
-
-  .glow-accent-blue {
-    box-shadow: 0 0 25px hsl(210, 85%, 55%, 0.4), 0 0 50px hsl(210, 85%, 55%, 0.2);
+  /* Subtle gaming glow effects */
+  .glow-cyan {
+    box-shadow:
+      0 0 10px hsl(195, 60%, 45%, 0.3),
+      0 0 20px hsl(195, 60%, 45%, 0.2);
   }
 
   .glow-yellow {
-    box-shadow: 0 0 25px hsl(45, 100%, 55%, 0.4), 0 0 50px hsl(45, 100%, 55%, 0.2);
+    box-shadow:
+      0 0 10px hsl(60, 70%, 50%, 0.3),
+      0 0 20px hsl(60, 70%, 50%, 0.2);
   }
 
   .glow-green {
-    box-shadow: 0 0 20px hsl(145, 65%, 45%, 0.3);
+    box-shadow:
+      0 0 10px hsl(120, 60%, 45%, 0.3),
+      0 0 20px hsl(120, 60%, 45%, 0.2);
   }
 
-  /* Glassmorphism effects */
-  .glass-card {
-    background: hsl(220, 60%, 25%, 0.1);
+  .glow-purple {
+    box-shadow:
+      0 0 10px hsl(280, 60%, 55%, 0.3),
+      0 0 20px hsl(280, 60%, 55%, 0.2);
+  }
+
+
+  /* Subtle gaming card effects */
+  .gaming-card {
+    background: linear-gradient(145deg, hsl(0, 0%, 5%), hsl(0, 0%, 10%));
+    border: 1px solid hsl(0, 0%, 25%);
     backdrop-filter: blur(20px);
-    border: 1px solid hsl(210, 100%, 95%, 0.1);
-    box-shadow: 0 8px 32px hsl(220, 40%, 8%, 0.3);
-  }
-
-  .glass-panel {
-    background: hsl(210, 100%, 95%, 0.05);
-    backdrop-filter: blur(16px);
-    border: 1px solid hsl(210, 100%, 95%, 0.08);
-    box-shadow: 0 4px 24px hsl(220, 40%, 8%, 0.2);
-  }
-
-  .glass-button {
-    background: hsl(220, 60%, 25%, 0.2);
-    backdrop-filter: blur(12px);
-    border: 1px solid hsl(220, 60%, 25%, 0.3);
+    box-shadow:
+      0 4px 16px rgba(0, 0, 0, 0.3),
+      inset 0 1px 0 rgba(255, 255, 255, 0.05);
     transition: all 0.3s ease;
   }
 
-  .glass-button:hover {
-    background: hsl(220, 60%, 25%, 0.3);
+  .gaming-card:hover {
     transform: translateY(-2px);
-    box-shadow: 0 8px 25px hsl(220, 60%, 25%, 0.3);
+    box-shadow:
+      0 8px 24px rgba(0, 0, 0, 0.4),
+      0 0 15px hsl(195, 60%, 45%, 0.2);
   }
 
-  .glass-yellow {
-    background: hsl(45, 100%, 55%, 0.15);
+  .gaming-panel {
+    background: linear-gradient(135deg, hsl(0, 0%, 8%) 0%, hsl(0, 0%, 12%) 100%);
+    border: 1px solid hsl(195, 60%, 45%, 0.4);
     backdrop-filter: blur(16px);
-    border: 1px solid hsl(45, 100%, 55%, 0.2);
+    box-shadow:
+      0 2px 12px rgba(0, 0, 0, 0.3),
+      inset 0 1px 0 rgba(195, 60%, 45%, 0.1);
+  }
+
+  .gaming-button {
+    background: linear-gradient(145deg, hsl(0, 0%, 15%), hsl(0, 0%, 20%));
+    border: 1px solid hsl(195, 60%, 45%);
+    backdrop-filter: blur(12px);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .gaming-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+    transition: left 0.5s;
+  }
+
+  .gaming-button:hover::before {
+    left: 100%;
+  }
+
+  .gaming-button:hover {
+    background: linear-gradient(145deg, hsl(195, 60%, 45%, 0.1), hsl(195, 60%, 45%, 0.2));
+    transform: translateY(-1px);
+    box-shadow:
+      0 4px 12px hsl(195, 60%, 45%, 0.2),
+      0 0 10px hsl(195, 60%, 45%, 0.3);
   }
 
   /* Mission Control aesthetic */

@@ -1,7 +1,6 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { GameCard, GameCardContent, GameCardHeader, GameCardTitle } from "@/components/ui/game-card"
 import { Progress } from "@/components/ui/progress"
 import { Badge } from "@/components/ui/badge"
 import { HelpTooltip } from "@/components/help-tooltip"
@@ -43,94 +42,113 @@ export function ResourcePanel({ gameState }: ResourcePanelProps) {
 
   return (
     <div className="space-y-4">
+      {/* Mission Info */}
+      <div className="gaming-card rounded-lg p-4 glow-cyan">
+        <div className="flex items-center gap-2 mb-4">
+          <Award className="w-5 h-5 text-yellow-400" />
+          <h3 className="text-white font-bold">MISSION STATUS</h3>
+        </div>
+        <div className="space-y-3">
+          <div className="flex items-center justify-between p-3 border border-cyan-500/60 rounded-lg bg-cyan-900/10">
+            <div className="flex items-center gap-2">
+              <span className="text-sm font-medium text-cyan-400">Mission Day</span>
+            </div>
+            <span className="font-bold text-white">DAY {gameState.daysElapsed}</span>
+          </div>
+
+          <div className="flex items-center justify-between p-3 border border-yellow-500/60 rounded-lg bg-yellow-900/10">
+            <div className="flex items-center gap-2">
+              <span className="text-sm font-medium text-yellow-400">Location</span>
+            </div>
+            <span className="font-bold text-white">{gameState.farmLocation.name}</span>
+          </div>
+        </div>
+      </div>
+
       {/* Resources */}
-      <GameCard variant="default">
-        <GameCardHeader>
-          <GameCardTitle className="flex items-center gap-2">
-            <Sprout className="w-5 h-5 text-green-600" />
-            Resources
-          </GameCardTitle>
-        </GameCardHeader>
-        <GameCardContent className="space-y-3">
-          <div className="flex items-center justify-between p-3 border border-blue-200 rounded-lg bg-blue-50">
+      <div className="gaming-card rounded-lg p-4 glow-green">
+        <div className="flex items-center gap-2 mb-4">
+          <Sprout className="w-5 h-5 text-green-400" />
+          <h3 className="text-white font-bold">RESOURCES</h3>
+        </div>
+        <div className="space-y-3">
+          <div className="flex items-center justify-between p-3 border border-cyan-500/60 rounded-lg bg-cyan-900/10 gaming-button">
             <div className="flex items-center gap-2">
-              <Droplets className="w-4 h-4 text-blue-600" />
-              <span className="text-sm font-medium text-blue-800">Water</span>
+              <Droplets className="w-4 h-4 text-cyan-400" />
+              <span className="text-sm font-medium text-cyan-300">Water</span>
             </div>
-            <span className="font-bold text-blue-900">{resources.water}L</span>
+            <span className="font-bold text-white">{resources.water}L</span>
           </div>
 
-          <div className="flex items-center justify-between p-3 border border-green-200 rounded-lg bg-green-50">
+          <div className="flex items-center justify-between p-3 border border-green-500/60 rounded-lg bg-green-900/10 gaming-button">
             <div className="flex items-center gap-2">
-              <Sparkles className="w-4 h-4 text-green-600" />
-              <span className="text-sm font-medium text-green-800">Fertilizer</span>
+              <Sparkles className="w-4 h-4 text-green-400" />
+              <span className="text-sm font-medium text-green-300">Fertilizer</span>
             </div>
-            <span className="font-bold text-green-900">{resources.fertilizer}kg</span>
+            <span className="font-bold text-white">{resources.fertilizer}kg</span>
           </div>
 
-          <div className="p-3 border border-teal-200 rounded-lg bg-teal-50">
+          <div className="p-3 border border-yellow-500/60 rounded-lg bg-yellow-900/10">
             <div className="flex items-center justify-between mb-2">
               <div className="flex items-center gap-2">
-                <Sprout className="w-4 h-4 text-teal-600" />
-                <span className="text-sm font-medium text-teal-800">Seeds</span>
+                <Sprout className="w-4 h-4 text-yellow-400" />
+                <span className="text-sm font-medium text-yellow-300">Seeds</span>
               </div>
-              <span className="font-bold text-teal-900">{totalSeeds}</span>
+              <span className="font-bold text-white">{totalSeeds}</span>
             </div>
             <div className="grid grid-cols-5 gap-1 text-xs">
               {Object.entries(resources.seeds).map(([crop, count]) => (
-                <div key={crop} className="text-center p-1 bg-white rounded border border-teal-100">
-                  <div className="font-bold text-teal-800">{count}</div>
-                  <div className="text-teal-600 capitalize">{crop.slice(0, 3)}</div>
+                <div key={crop} className="text-center p-2 bg-black/50 rounded border border-yellow-500/60">
+                  <div className="font-bold text-yellow-300 text-sm">{count}</div>
+                  <div className="text-gray-300 capitalize">{crop.slice(0, 3)}</div>
                 </div>
               ))}
             </div>
           </div>
 
-          <div className="flex items-center justify-between p-3 border border-green-300 rounded-lg bg-gradient-to-r from-green-100 to-green-50">
+          <div className="flex items-center justify-between p-3 border border-green-500/60 rounded-lg bg-green-900/10 gaming-button">
             <div className="flex items-center gap-2">
-              <DollarSign className="w-5 h-5 text-green-600" />
-              <span className="text-sm font-medium text-green-800">Money</span>
+              <DollarSign className="w-5 h-5 text-green-400" />
+              <span className="text-sm font-medium text-green-300">Money</span>
             </div>
-            <span className="text-lg font-bold text-green-900">
+            <span className="text-lg font-bold text-white">
               ${resources.money.toLocaleString()}
             </span>
           </div>
-        </GameCardContent>
-      </GameCard>
+        </div>
+      </div>
 
       {/* Score */}
-      <GameCard variant="default">
-        <GameCardHeader>
-          <GameCardTitle className="flex items-center gap-2">
-            <Award className="w-5 h-5 text-blue-600" />
-            Performance
-          </GameCardTitle>
-        </GameCardHeader>
-        <GameCardContent className="space-y-3">
-          <div className="flex items-center justify-between p-3 border border-green-200 rounded-lg bg-green-50">
+      <div className="gaming-card rounded-lg p-4 glow-yellow">
+        <div className="flex items-center gap-2 mb-4">
+          <Award className="w-5 h-5 text-yellow-400" />
+          <h3 className="text-white font-bold">PERFORMANCE</h3>
+        </div>
+        <div className="space-y-3">
+          <div className="flex items-center justify-between p-3 border border-green-500/60 rounded-lg bg-green-900/10 gaming-button">
             <div className="flex items-center gap-2">
-              <Leaf className="w-4 h-4 text-green-600" />
-              <span className="text-sm font-medium text-green-800">Sustainability</span>
+              <Leaf className="w-4 h-4 text-green-400" />
+              <span className="text-sm font-medium text-green-300">Sustainability</span>
             </div>
-            <span className="font-bold text-green-900">{Math.floor(score.sustainability)}%</span>
-          </div>
-          
-          <div className="flex items-center justify-between p-3 border border-blue-200 rounded-lg bg-blue-50">
-            <div className="flex items-center gap-2">
-              <TrendingUp className="w-4 h-4 text-blue-600" />
-              <span className="text-sm font-medium text-blue-800">Efficiency</span>
-            </div>
-            <span className="font-bold text-blue-900">{Math.floor(score.efficiency)}%</span>
+            <span className="font-bold text-white">{Math.floor(score.sustainability)}%</span>
           </div>
 
-          <div className="flex items-center justify-between p-3 border border-teal-200 rounded-lg bg-gradient-to-r from-teal-100 to-blue-50">
-            <span className="text-sm font-medium text-teal-800">Total Harvest</span>
-            <span className="font-bold text-teal-900">
+          <div className="flex items-center justify-between p-3 border border-cyan-500/60 rounded-lg bg-cyan-900/10 gaming-button">
+            <div className="flex items-center gap-2">
+              <TrendingUp className="w-4 h-4 text-cyan-400" />
+              <span className="text-sm font-medium text-cyan-300">Efficiency</span>
+            </div>
+            <span className="font-bold text-white">{Math.floor(score.efficiency)}%</span>
+          </div>
+
+          <div className="flex items-center justify-between p-3 border border-yellow-500/60 rounded-lg bg-yellow-900/10 gaming-button">
+            <span className="text-sm font-medium text-yellow-300">Total Harvest</span>
+            <span className="font-bold text-white">
               {score.cropYield.toLocaleString()}
             </span>
           </div>
-        </GameCardContent>
-      </GameCard>
+        </div>
+      </div>
     </div>
   )
 }

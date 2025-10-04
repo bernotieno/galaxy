@@ -7,12 +7,9 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { GameSettings } from "@/components/game-settings"
 import { TutorialTrigger } from "@/components/onboarding-tutorial"
 import type { GameState } from "@/lib/game-types"
-import { 
-  Satellite, 
-  Coins, 
-  Droplets, 
-  Sparkles, 
-  User, 
+import {
+  Satellite,
+  User,
   Star,
   Zap,
   Crown,
@@ -48,10 +45,10 @@ export function GameHUD({
   }
 
   return (
-    <div className="bg-gradient-to-r from-blue-600 to-teal-600 border-b border-blue-500 shadow-lg sticky top-0 z-50">
+    <div className="bg-black border-b border-gray-800 shadow-lg sticky top-0 z-50">
       <div className="container mx-auto px-4 py-3">
         <div className="flex items-center justify-between">
-          
+
           {/* Left: Simple Logo */}
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 bg-green-500 rounded-full flex items-center justify-center shadow-md">
@@ -59,33 +56,17 @@ export function GameHUD({
             </div>
             <div>
               <h1 className="text-lg font-bold text-white">NASA Farm Game</h1>
-              <p className="text-xs text-blue-100">Sustainable Farming Simulator</p>
-            </div>
-          </div>
-
-          {/* Center: Simple Resource Display */}
-          <div className="hidden md:flex items-center gap-4 text-sm">
-            <div className="flex items-center gap-1 text-green-100 bg-green-600/20 px-2 py-1 rounded">
-              <Coins className="w-4 h-4" />
-              <span>${resources.money.toLocaleString()}</span>
-            </div>
-            <div className="flex items-center gap-1 text-blue-100 bg-blue-600/20 px-2 py-1 rounded">
-              <Droplets className="w-4 h-4" />
-              <span>{resources.water}L</span>
-            </div>
-            <div className="flex items-center gap-1 text-green-100 bg-green-600/20 px-2 py-1 rounded">
-              <Sparkles className="w-4 h-4" />
-              <span>{resources.fertilizer}kg</span>
+              <p className="text-xs text-gray-400">Sustainable Farming Simulator</p>
             </div>
           </div>
 
           {/* Right: Simple Actions */}
           <div className="flex items-center gap-2">
-            <Button 
-              onClick={onUpdateNASAData} 
-              size="sm" 
+            <Button
+              onClick={onUpdateNASAData}
+              size="sm"
               variant="outline"
-              className="text-white border-white/30 hover:bg-white/10"
+              className="text-white border-gray-600 hover:bg-gray-800"
             >
               <Satellite className="w-4 h-4 mr-1" />
               Update Data

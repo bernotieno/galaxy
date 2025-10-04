@@ -1,11 +1,9 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState } from "react"
 import { cn } from "@/lib/utils"
 import type { FarmCell, CropType } from "@/lib/game-types"
 import { Button } from "@/components/ui/button"
-import { Badge } from "@/components/ui/badge"
-import { Card, CardContent } from "@/components/ui/card"
 import {
   Zap,
   Droplets,
@@ -57,7 +55,6 @@ export function EnhancedFarmGrid({ grid, onCellClick, selectedCell }: EnhancedFa
   const [isZoomed, setIsZoomed] = useState(false)
   const [hoveredCell, setHoveredCell] = useState<{row: number, col: number} | null>(null)
   const [showGrid, setShowGrid] = useState(true)
-  const [animations, setAnimations] = useState(true)
 
   // Calculate grid statistics
   const totalCells = grid.length * grid[0].length
@@ -105,104 +102,109 @@ export function EnhancedFarmGrid({ grid, onCellClick, selectedCell }: EnhancedFa
   return (
     <div className="space-y-4">
       {/* Control Panel */}
-      <Card>
-        <CardContent className="p-4">
-          <div className="flex flex-wrap gap-2 items-center justify-between">
-            {/* View Mode Selector */}
-            <div className="flex gap-1">
-              <Button
-                variant={viewMode === "normal" ? "default" : "outline"}
-                size="sm"
-                onClick={() => setViewMode("normal")}
-                className="gap-2"
-              >
-                <Eye className="w-4 h-4" />
-                Normal
-              </Button>
-              <Button
-                variant={viewMode === "soil" ? "default" : "outline"}
-                size="sm"
-                onClick={() => setViewMode("soil")}
-                className="gap-2"
-              >
-                <Layers className="w-4 h-4" />
-                Soil
-              </Button>
-              <Button
-                variant={viewMode === "moisture" ? "default" : "outline"}
-                size="sm"
-                onClick={() => setViewMode("moisture")}
-                className="gap-2"
-              >
-                <Droplets className="w-4 h-4" />
-                Moisture
-              </Button>
-              <Button
-                variant={viewMode === "health" ? "default" : "outline"}
-                size="sm"
-                onClick={() => setViewMode("health")}
-                className="gap-2"
-              >
-                <Zap className="w-4 h-4" />
-                Health
-              </Button>
-              <Button
-                variant={viewMode === "analytics" ? "default" : "outline"}
-                size="sm"
-                onClick={() => setViewMode("analytics")}
-                className="gap-2"
-              >
-                <BarChart3 className="w-4 h-4" />
-                Analytics
-              </Button>
-            </div>
-
-            {/* Grid Options */}
-            <div className="flex gap-2 items-center">
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={() => setShowGrid(!showGrid)}
-                className="gap-2"
-              >
-                <Grid3X3 className="w-4 h-4" />
-                {showGrid ? "Hide" : "Show"} Grid
-              </Button>
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={() => setIsZoomed(!isZoomed)}
-                className="gap-2"
-              >
-                <Maximize2 className="w-4 h-4" />
-                {isZoomed ? "Zoom Out" : "Zoom In"}
-              </Button>
-            </div>
-
-            {/* Quick Stats */}
-            <div className="flex gap-3 text-sm">
-              <Badge variant="outline" className="gap-1">
-                <CheckCircle className="w-3 h-3 text-green-500" />
-                {occupiedCells}/{totalCells}
-              </Badge>
-              {readyToHarvest > 0 && (
-                <Badge variant="outline" className="gap-1 bg-green-50">
-                  🌾 {readyToHarvest} Ready
-                </Badge>
-              )}
-              {needsAttention > 0 && (
-                <Badge variant="outline" className="gap-1 bg-red-50">
-                  <AlertTriangle className="w-3 h-3 text-red-500" />
-                  {needsAttention} Need Care
-                </Badge>
-              )}
-            </div>
+      <div className="gaming-panel p-4 rounded-lg border-2 border-green-400 glow-green">
+        <div className="flex flex-wrap gap-2 items-center justify-between">
+          {/* Farm Size Info */}
+          <div className="text-white text-sm">
+            <div className="font-bold text-green-400">FARM PLOT: 8x8 GRID (64 CELLS)</div>
+            <div className="text-cyan-300">Each cell: 10m × 10m (100m² per plot)</div>
+            <div className="text-yellow-300">Total area: 6,400m² (0.64 hectares)</div>
           </div>
-        </CardContent>
-      </Card>
+
+          {/* View Mode Selector */}
+          <div className="flex gap-1">
+            <Button
+              variant={viewMode === "normal" ? "default" : "outline"}
+              size="sm"
+              onClick={() => setViewMode("normal")}
+              className="gap-2"
+            >
+              <Eye className="w-4 h-4" />
+              Normal
+            </Button>
+            <Button
+              variant={viewMode === "soil" ? "default" : "outline"}
+              size="sm"
+              onClick={() => setViewMode("soil")}
+              className="gap-2"
+            >
+              <Layers className="w-4 h-4" />
+              Soil
+            </Button>
+            <Button
+              variant={viewMode === "moisture" ? "default" : "outline"}
+              size="sm"
+              onClick={() => setViewMode("moisture")}
+              className="gap-2"
+            >
+              <Droplets className="w-4 h-4" />
+              Moisture
+            </Button>
+            <Button
+              variant={viewMode === "health" ? "default" : "outline"}
+              size="sm"
+              onClick={() => setViewMode("health")}
+              className="gap-2"
+            >
+              <Zap className="w-4 h-4" />
+              Health
+            </Button>
+            <Button
+              variant={viewMode === "analytics" ? "default" : "outline"}
+              size="sm"
+              onClick={() => setViewMode("analytics")}
+              className="gap-2"
+            >
+              <BarChart3 className="w-4 h-4" />
+              Analytics
+            </Button>
+          </div>
+
+          {/* Grid Options */}
+          <div className="flex gap-2 items-center">
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => setShowGrid(!showGrid)}
+              className="gap-2"
+            >
+              <Grid3X3 className="w-4 h-4" />
+              {showGrid ? "Hide" : "Show"} Grid
+            </Button>
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => setIsZoomed(!isZoomed)}
+              className="gap-2"
+            >
+              <Maximize2 className="w-4 h-4" />
+              {isZoomed ? "Zoom Out" : "Zoom In"}
+            </Button>
+          </div>
+
+          {/* Quick Stats */}
+          <div className="flex gap-3 text-sm">
+            <div className="gaming-button gap-1 bg-black text-white border-cyan-400 p-2 rounded">
+              <CheckCircle className="w-3 h-3 text-green-400 inline mr-1" />
+              {occupiedCells}/{totalCells}
+            </div>
+            {readyToHarvest > 0 && (
+              <div className="gaming-button gap-1 bg-green-900/30 text-green-300 border-green-400 p-2 rounded">
+                🌾 {readyToHarvest} Ready
+              </div>
+            )}
+            {needsAttention > 0 && (
+              <div className="gaming-button gap-1 bg-red-900/30 text-red-300 border-red-400 p-2 rounded">
+                <AlertTriangle className="w-3 h-3 text-red-400 inline mr-1" />
+                {needsAttention} Need Care
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
 
       {/* Enhanced Farm Grid */}
-      <div className={`relative bg-gradient-to-br from-green-100 via-green-50 to-emerald-100 rounded-xl p-6 shadow-lg transition-all duration-500 ${
+      <div className={`gaming-card rounded-xl p-6 glow-green transition-all duration-500 ${
         isZoomed ? "scale-110 z-10" : ""
       }`}>
 
@@ -239,9 +241,9 @@ export function EnhancedFarmGrid({ grid, onCellClick, selectedCell }: EnhancedFa
                     "relative rounded-lg border-2 transition-all duration-300 group overflow-hidden",
                     "hover:scale-105 hover:shadow-lg hover:z-10",
                     "focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500",
-                    isSelected ? "border-blue-500 ring-2 ring-blue-300 scale-105 z-20" : "border-green-300/50",
-                    isHovered && !isSelected ? "border-blue-300 scale-102" : "",
-                    cell.irrigated && "ring-2 ring-blue-400 shadow-blue-200 shadow-lg",
+                    isSelected ? "border-cyan-400 ring-2 ring-cyan-300 scale-105 z-20" : "border-green-300/50",
+                    isHovered && !isSelected ? "border-yellow-300 scale-102" : "",
+                    cell.irrigated && "ring-2 ring-cyan-400 shadow-cyan-200 shadow-lg",
                     cell.fertilized && "ring-2 ring-green-400 shadow-green-200 shadow-lg",
                     needsAttention && "border-red-400 animate-pulse",
                     showGrid ? "border-opacity-100" : "border-opacity-0"
@@ -267,7 +269,7 @@ export function EnhancedFarmGrid({ grid, onCellClick, selectedCell }: EnhancedFa
 
                   {/* Soil moisture indicator */}
                   <div
-                    className="absolute inset-0 bg-gradient-to-t from-blue-400/30 to-transparent rounded-lg transition-all duration-300"
+                    className="absolute inset-0 bg-gradient-to-t from-cyan-400/30 to-transparent rounded-lg transition-all duration-300"
                     style={{ opacity: cell.soilMoisture * 0.7 }}
                   />
 
@@ -277,8 +279,7 @@ export function EnhancedFarmGrid({ grid, onCellClick, selectedCell }: EnhancedFa
                       className={cn(
                         "absolute inset-1 rounded-md flex flex-col items-center justify-center transition-all duration-500",
                         CROP_COLORS[cell.crop.type],
-                        STAGE_STYLES[cell.crop.stage],
-                        animations && "transform-gpu"
+                        STAGE_STYLES[cell.crop.stage]
                       )}
                     >
                       {/* Crop emoji or letter */}
@@ -334,7 +335,7 @@ export function EnhancedFarmGrid({ grid, onCellClick, selectedCell }: EnhancedFa
 
                     {/* Irrigation indicator */}
                     {cell.irrigated && (
-                      <div className="w-3 h-3 bg-blue-500 rounded-full border border-white animate-pulse">
+                      <div className="w-3 h-3 bg-cyan-500 rounded-full border border-white animate-pulse">
                         <Droplets className="w-2 h-2 text-white m-0.5" />
                       </div>
                     )}
@@ -351,7 +352,7 @@ export function EnhancedFarmGrid({ grid, onCellClick, selectedCell }: EnhancedFa
 
                   {/* Selection highlight */}
                   {isSelected && (
-                    <div className="absolute inset-0 bg-blue-400/20 rounded-lg animate-pulse" />
+                    <div className="absolute inset-0 bg-cyan-400/20 rounded-lg animate-pulse" />
                   )}
 
                   {/* Hover effect */}
@@ -376,28 +377,26 @@ export function EnhancedFarmGrid({ grid, onCellClick, selectedCell }: EnhancedFa
 
       {/* Legend */}
       {viewMode !== "normal" && (
-        <Card>
-          <CardContent className="p-4">
-            <div className="flex flex-wrap gap-4 text-sm">
-              <div className="flex items-center gap-2">
-                <div className="w-4 h-4 rounded bg-red-500"></div>
-                <span>Poor ({viewMode === "soil" ? "Quality" : viewMode === "moisture" ? "Dry" : "Unhealthy"})</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <div className="w-4 h-4 rounded bg-yellow-500"></div>
-                <span>Average</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <div className="w-4 h-4 rounded bg-green-500"></div>
-                <span>Good ({viewMode === "soil" ? "Quality" : viewMode === "moisture" ? "Moist" : "Healthy"})</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <div className="w-4 h-4 rounded bg-blue-500"></div>
-                <span>Excellent</span>
-              </div>
+        <div className="gaming-panel p-4 rounded-lg border-2 border-cyan-400">
+          <div className="flex flex-wrap gap-4 text-sm">
+            <div className="flex items-center gap-2">
+              <div className="w-4 h-4 rounded bg-red-500"></div>
+              <span className="text-white">Poor ({viewMode === "soil" ? "Quality" : viewMode === "moisture" ? "Dry" : "Unhealthy"})</span>
             </div>
-          </CardContent>
-        </Card>
+            <div className="flex items-center gap-2">
+              <div className="w-4 h-4 rounded bg-yellow-500"></div>
+              <span className="text-white">Average</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <div className="w-4 h-4 rounded bg-green-500"></div>
+              <span className="text-white">Good ({viewMode === "soil" ? "Quality" : viewMode === "moisture" ? "Moist" : "Healthy"})</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <div className="w-4 h-4 rounded bg-cyan-500"></div>
+              <span className="text-white">Excellent</span>
+            </div>
+          </div>
+        </div>
       )}
     </div>
   )

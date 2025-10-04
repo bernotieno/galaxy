@@ -190,36 +190,14 @@ function GameContent() {
 
   return (
     <div className="min-h-screen">
-      {/* NASA Mission Control HUD Header */}
-      <div className="sticky top-0 z-50 mission-control-panel border-b border-nasa-blue/20">
-        <GameHUD
-          gameState={state}
-          onUpdateNASAData={updateWithNASAData}
-          onStartTutorial={handleStartTutorial}
-          playerLevel={Math.floor(state.score.cropYield / 100) + 1}
-          playerXP={state.score.cropYield % 100}
-        />
-
-        {/* Mission Info Bar */}
-        <div className="flex justify-between items-center pb-4 px-4">
-          <LocationSelector
-            currentLocation={state.farmLocation}
-            onLocationChange={handleLocationChange}
-          />
-
-          <div className="days-counter px-6 py-3 rounded-lg text-center">
-            <div className="text-nasa-blue text-sm font-medium">MISSION DAY</div>
-            <div className="text-3xl font-bold text-nasa-red">{state.daysElapsed}</div>
-            <div className="text-xs text-nasa-blue/80">{state.currentDate.toLocaleDateString()}</div>
-          </div>
-
-          <div className="glass-panel px-4 py-2 rounded-lg text-center">
-            <div className="text-nasa-blue text-xs font-medium">LOCATION</div>
-            <div className="text-sm font-bold text-foreground">{state.farmLocation.name}</div>
-            <div className="text-xs text-muted-foreground capitalize">{state.farmLocation.climate}</div>
-          </div>
-        </div>
-      </div>
+      {/* Clean Header */}
+      <GameHUD
+        gameState={state}
+        onUpdateNASAData={updateWithNASAData}
+        onStartTutorial={handleStartTutorial}
+        playerLevel={Math.floor(state.score.cropYield / 100) + 1}
+        playerXP={state.score.cropYield % 100}
+      />
 
       {/* Main Content */}
       <main className="container mx-auto px-4 py-6 space-y-6">
@@ -233,21 +211,57 @@ function GameContent() {
           </div>
         )}
 
-        {/* NASA Mission Control Tabs */}
+        {/* Gaming Mission Control Tabs */}
         <Tabs defaultValue="farm" className="space-y-6">
-          <div className="flex justify-center">
-            <TabsList className="glass-panel grid grid-cols-3 p-2 rounded-xl">
-              <TabsTrigger value="farm" className="glass-button gap-2 data-[state=active]:glass-nasa-red">
-                <Tractor className="w-4 h-4" />
-                Farm Operations
+          <div className="flex justify-center mb-8 w-full">
+            <TabsList className="gaming-panel grid grid-cols-3 gap-2 p-4 rounded-xl border border-cyan-500/60 bg-gradient-to-r from-gray-900 to-gray-800 shadow-lg w-full max-w-2xl h-auto min-h-[80px] items-stretch">
+              <TabsTrigger
+                value="farm"
+                className="
+                  flex items-center justify-center gap-2 text-cyan-300 font-bold p-3 rounded-lg
+                  transition-all duration-300 ease-in-out min-h-[60px] w-full
+                  bg-transparent border border-transparent
+                  hover:bg-cyan-900/20 hover:border-cyan-500/50 hover:text-cyan-200 hover:scale-[1.02]
+                  data-[state=active]:bg-cyan-900/30 data-[state=active]:border-cyan-400
+                  data-[state=active]:text-cyan-100 data-[state=active]:shadow-lg
+                  data-[state=active]:shadow-cyan-500/20 data-[state=active]:scale-[1.02]
+                "
+              >
+                <Tractor className="w-5 h-5" />
+                <span className="hidden sm:inline">FARM OPS</span>
+                <span className="sm:hidden">FARM</span>
               </TabsTrigger>
-              <TabsTrigger value="dashboard" className="glass-button gap-2 data-[state=active]:glass-nasa-red">
-                <Target className="w-4 h-4" />
-                Mission Control
+              <TabsTrigger
+                value="dashboard"
+                className="
+                  flex items-center justify-center gap-2 text-yellow-300 font-bold p-3 rounded-lg
+                  transition-all duration-300 ease-in-out min-h-[60px] w-full
+                  bg-transparent border border-transparent
+                  hover:bg-yellow-900/20 hover:border-yellow-500/50 hover:text-yellow-200 hover:scale-[1.02]
+                  data-[state=active]:bg-yellow-900/30 data-[state=active]:border-yellow-400
+                  data-[state=active]:text-yellow-100 data-[state=active]:shadow-lg
+                  data-[state=active]:shadow-yellow-500/20 data-[state=active]:scale-[1.02]
+                "
+              >
+                <Target className="w-5 h-5" />
+                <span className="hidden sm:inline">MISSION CTRL</span>
+                <span className="sm:hidden">CTRL</span>
               </TabsTrigger>
-              <TabsTrigger value="data" className="glass-button gap-2 data-[state=active]:glass-nasa-red">
-                <Satellite className="w-4 h-4" />
-                Earth Observation
+              <TabsTrigger
+                value="data"
+                className="
+                  flex items-center justify-center gap-2 text-green-300 font-bold p-3 rounded-lg
+                  transition-all duration-300 ease-in-out min-h-[60px] w-full
+                  bg-transparent border border-transparent
+                  hover:bg-green-900/20 hover:border-green-500/50 hover:text-green-200 hover:scale-[1.02]
+                  data-[state=active]:bg-green-900/30 data-[state=active]:border-green-400
+                  data-[state=active]:text-green-100 data-[state=active]:shadow-lg
+                  data-[state=active]:shadow-green-500/20 data-[state=active]:scale-[1.02]
+                "
+              >
+                <Satellite className="w-5 h-5" />
+                <span className="hidden sm:inline">EARTH DATA</span>
+                <span className="sm:hidden">DATA</span>
               </TabsTrigger>
             </TabsList>
           </div>
@@ -265,10 +279,10 @@ function GameContent() {
 
             <div className="grid xl:grid-cols-4 lg:grid-cols-3 gap-6">
               <div className="xl:col-span-3 lg:col-span-2 space-y-6">
-                <div className="glass-card p-6 rounded-xl">
+                <div className="gaming-card rounded-xl p-6 glow-cyan">
                   <EnhancedFarmGrid grid={state.farmGrid} onCellClick={handleCellClick} selectedCell={selectedCell} />
                 </div>
-                <div className="glass-card p-6 rounded-xl">
+                <div className="gaming-card rounded-xl p-6 glow-green">
                   <GameControls
                     selectedCell={selectedCell}
                     onPlantCrop={handlePlantCrop}
@@ -281,10 +295,10 @@ function GameContent() {
                 </div>
               </div>
               <div className="space-y-6">
-                <div className="glass-panel p-6 rounded-xl">
+                <div className="gaming-card rounded-xl p-6 glow-yellow">
                   <CellDetails cell={cell} />
                 </div>
-                <div className="glass-panel p-6 rounded-xl">
+                <div>
                   <ResourcePanel gameState={state} />
                 </div>
               </div>
@@ -295,15 +309,15 @@ function GameContent() {
           <TabsContent value="dashboard" className="space-y-6">
             <div className="grid lg:grid-cols-3 gap-6">
               <div className="lg:col-span-2">
-                <div className="glass-card p-6 rounded-xl glow-nasa-blue">
+                <div className="gaming-card p-6 rounded-xl glow-yellow">
                   <GameDashboard gameState={state} />
                 </div>
               </div>
               <div className="space-y-6">
-                <div className="glass-panel p-6 rounded-xl">
+                <div>
                   <ResourcePanel gameState={state} />
                 </div>
-                <div className="glass-panel p-6 rounded-xl">
+                <div className="gaming-card p-6 rounded-xl glow-cyan">
                   <CellDetails cell={cell} />
                 </div>
               </div>
@@ -314,18 +328,18 @@ function GameContent() {
           <TabsContent value="data" className="space-y-6">
             <div className="grid lg:grid-cols-3 gap-6">
               <div className="lg:col-span-2 space-y-6">
-                <div className="glass-card p-6 rounded-xl glow-nasa-red">
+                <div className="gaming-card p-6 rounded-xl glow-green">
                   <WeatherWidget gameState={state} />
                 </div>
-                <div className="glass-card p-6 rounded-xl">
+                <div className="gaming-card p-6 rounded-xl glow-cyan">
                   <SatelliteDashboard />
                 </div>
               </div>
               <div className="space-y-6">
-                <div className="glass-panel p-6 rounded-xl border-nasa-red/20">
+                <div className="gaming-card p-6 rounded-xl glow-yellow">
                   <NASAStatus onAuthenticate={handleNASAAuthenticate} />
                 </div>
-                <div className="glass-panel p-6 rounded-xl">
+                <div className="gaming-card p-6 rounded-xl glow-green">
                   <DataInsights />
                 </div>
               </div>
