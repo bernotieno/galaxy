@@ -17,11 +17,11 @@ export default function InteractiveDataDashboard({ nasaData }: InteractiveDataDa
     const newAnimatedValues: Record<string, number> = {};
     
     if (nasaData) {
-      // Animate temperature
-      animateValue('temperature', nasaData.weather.temperature, newAnimatedValues);
-      animateValue('humidity', nasaData.weather.humidity, newAnimatedValues);
-      animateValue('soilMoisture', nasaData.soil.surfaceMoisture, newAnimatedValues);
-      animateValue('ndvi', nasaData.vegetation.ndvi * 100, newAnimatedValues);
+      // Only animate if data is available
+      if (nasaData.weather.temperature) animateValue('temperature', nasaData.weather.temperature, newAnimatedValues);
+      if (nasaData.weather.humidity) animateValue('humidity', nasaData.weather.humidity, newAnimatedValues);
+      if (nasaData.soil.surfaceMoisture) animateValue('soilMoisture', nasaData.soil.surfaceMoisture, newAnimatedValues);
+      if (nasaData.vegetation.ndvi) animateValue('ndvi', nasaData.vegetation.ndvi * 100, newAnimatedValues);
     }
     
     setAnimatedValues(newAnimatedValues);
@@ -51,16 +51,28 @@ export default function InteractiveDataDashboard({ nasaData }: InteractiveDataDa
   const generateAlerts = () => {
     const newAlerts: string[] = [];
     
-    if (nasaData.soil.surfaceMoisture < 30) {
+    // Check for API availability first
+    if (nasaData.weather.source === 'API Error' || nasaData.weather.source === 'API Unavailable') {
+      newAlerts.push('⚠️ Weather API unavailable');
+    }
+    if (nasaData.soil.source === 'API Error' || nasaData.soil.source === 'API Unavailable') {
+      newAlerts.push('⚠️ Soil API unavailable');
+    }
+    if (nasaData.vegetation.source === 'API Error' || nasaData.vegetation.source === 'API Unavailable') {
+      newAlerts.push('⚠️ Vegetation API unavailable');
+    }
+    
+    // Only generate agricultural alerts if data is available
+    if (nasaData.soil.surfaceMoisture && nasaData.soil.surfaceMoisture < 30) {
       newAlerts.push('🚨 Low soil moisture detected!');
     }
-    if (nasaData.weather.temperature > 35) {
+    if (nasaData.weather.temperature && nasaData.weather.temperature > 35) {
       newAlerts.push('🔥 Extreme heat warning!');
     }
-    if (nasaData.vegetation.ndvi < 0.4) {
+    if (nasaData.vegetation.ndvi && nasaData.vegetation.ndvi < 0.4) {
       newAlerts.push('📉 Poor vegetation health detected!');
     }
-    if (nasaData.precipitation.dailyPrecipitation > 50) {
+    if (nasaData.precipitation.dailyPrecipitation && nasaData.precipitation.dailyPrecipitation > 50) {
       newAlerts.push('🌊 Heavy rainfall alert!');
     }
     
@@ -128,8 +140,8 @@ export default function InteractiveDataDashboard({ nasaData }: InteractiveDataDa
           <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
             <div className="bg-gradient-to-br from-blue-50 to-blue-100 p-6 rounded-xl hover:shadow-lg transition-shadow">
               <div className="text-base text-gray-600 mb-2">Temperature</div>
-              <div className={`text-4xl font-bold ${getValueColor(nasaData.weather.temperature, { good: 20, warning: 15 })}`}>
-                {Math.round(animatedValues.temperature || nasaData.weather.temperature)}°C
+              <div className={`text-4xl font-bold ${getValueColor(nasaData.weather.temperature || 0, { good: 20, warning: 15 })}`}>
+                {Math.round(animatedValues.temperature || nasaData.weather.temperature || 0)}°C
               </div>
               <div className="w-full bg-gray-200 rounded-full h-3 mt-3">
                 <div 
@@ -141,8 +153,8 @@ export default function InteractiveDataDashboard({ nasaData }: InteractiveDataDa
 
             <div className="bg-gradient-to-br from-cyan-50 to-cyan-100 p-4 rounded-lg hover:shadow-md transition-shadow">
               <div className="text-sm text-gray-600">Humidity</div>
-              <div className={`text-3xl font-bold ${getValueColor(nasaData.weather.humidity, { good: 50, warning: 30 })}`}>
-                {Math.round(animatedValues.humidity || nasaData.weather.humidity)}%
+              <div className={`text-3xl font-bold ${getValueColor(nasaData.weather.humidity || 0, { good: 50, warning: 30 })}`}>
+                {Math.round(animatedValues.humidity || nasaData.weather.humidity || 0)}%
               </div>
               <div className="w-full bg-gray-200 rounded-full h-2 mt-2">
                 <div 
@@ -154,7 +166,7 @@ export default function InteractiveDataDashboard({ nasaData }: InteractiveDataDa
 
             <div className="bg-gradient-to-br from-gray-50 to-gray-100 p-4 rounded-lg hover:shadow-md transition-shadow">
               <div className="text-sm text-gray-600">Wind Speed</div>
-              <div className="text-3xl font-bold text-gray-600">{nasaData.weather.windSpeed} km/h</div>
+              <div className="text-3xl font-bold text-gray-600">{nasaData.weather.windSpeed || 0} km/h</div>
               <div className="text-xs text-gray-500 mt-1">
                 {nasaData.weather.windSpeed > 20 ? 'High' : nasaData.weather.windSpeed > 10 ? 'Moderate' : 'Low'}
               </div>
@@ -171,8 +183,8 @@ export default function InteractiveDataDashboard({ nasaData }: InteractiveDataDa
           <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
             <div className="bg-gradient-to-br from-amber-50 to-amber-100 p-4 rounded-lg hover:shadow-md transition-shadow">
               <div className="text-sm text-gray-600">Surface Moisture</div>
-              <div className={`text-3xl font-bold ${getValueColor(nasaData.soil.surfaceMoisture, { good: 50, warning: 30 })}`}>
-                {Math.round(animatedValues.soilMoisture || nasaData.soil.surfaceMoisture)}%
+              <div className={`text-3xl font-bold ${getValueColor(nasaData.soil.surfaceMoisture || 0, { good: 50, warning: 30 })}`}>
+                {Math.round(animatedValues.soilMoisture || nasaData.soil.surfaceMoisture || 0)}%
               </div>
               <div className="w-full bg-gray-200 rounded-full h-2 mt-2">
                 <div 
@@ -184,14 +196,14 @@ export default function InteractiveDataDashboard({ nasaData }: InteractiveDataDa
 
             <div className="bg-gradient-to-br from-orange-50 to-orange-100 p-4 rounded-lg hover:shadow-md transition-shadow">
               <div className="text-sm text-gray-600">Soil Temperature</div>
-              <div className="text-3xl font-bold text-orange-600">{nasaData.soil.soilTemperature}°C</div>
+              <div className="text-3xl font-bold text-orange-600">{nasaData.soil.soilTemperature || 0}°C</div>
               <div className="text-xs text-gray-500 mt-1">0-10cm depth</div>
             </div>
 
             <div className="bg-gradient-to-br from-purple-50 to-purple-100 p-4 rounded-lg hover:shadow-md transition-shadow">
               <div className="text-sm text-gray-600">pH Level</div>
-              <div className={`text-3xl font-bold ${getValueColor(nasaData.soil.pH, { good: 6.5, warning: 6.0 })}`}>
-                {nasaData.soil.pH.toFixed(1)}
+              <div className={`text-3xl font-bold ${getValueColor(nasaData.soil.pH || 0, { good: 6.5, warning: 6.0 })}`}>
+                {(nasaData.soil.pH || 0).toFixed(1)}
               </div>
               <div className="text-xs text-gray-500 mt-1">
                 {nasaData.soil.pH > 7.5 ? 'Alkaline' : nasaData.soil.pH < 6.0 ? 'Acidic' : 'Optimal'}
@@ -207,10 +219,10 @@ export default function InteractiveDataDashboard({ nasaData }: InteractiveDataDa
           <h3 className="text-lg font-semibold text-gray-800">Vegetation Health (NDVI)</h3>
           
           <div className="text-center">
-            <div className={`text-6xl font-bold mb-2 ${getValueColor(nasaData.vegetation.ndvi * 100, { good: 60, warning: 40 })}`}>
-              {(animatedValues.ndvi || nasaData.vegetation.ndvi * 100).toFixed(0)}%
+            <div className={`text-6xl font-bold mb-2 ${getValueColor((nasaData.vegetation.ndvi || 0) * 100, { good: 60, warning: 40 })}`}>
+              {(animatedValues.ndvi || (nasaData.vegetation.ndvi || 0) * 100).toFixed(0)}%
             </div>
-            <div className="text-lg text-gray-600 mb-4">{nasaData.vegetation.vegetationHealth}</div>
+            <div className="text-lg text-gray-600 mb-4">{nasaData.vegetation.vegetationHealth || 'Unknown'}</div>
             
             <div className="w-full bg-gray-200 rounded-full h-4 mb-4">
               <div 
@@ -223,11 +235,11 @@ export default function InteractiveDataDashboard({ nasaData }: InteractiveDataDa
           <div className="grid grid-cols-2 gap-4">
             <div className="bg-green-50 p-4 rounded-lg">
               <div className="text-sm text-gray-600">EVI</div>
-              <div className="text-2xl font-bold text-green-600">{nasaData.vegetation.evi.toFixed(3)}</div>
+              <div className="text-2xl font-bold text-green-600">{(nasaData.vegetation.evi || 0).toFixed(3)}</div>
             </div>
             <div className="bg-green-50 p-4 rounded-lg">
               <div className="text-sm text-gray-600">LAI</div>
-              <div className="text-2xl font-bold text-green-600">{nasaData.vegetation.lai.toFixed(2)}</div>
+              <div className="text-2xl font-bold text-green-600">{(nasaData.vegetation.lai || 0).toFixed(2)}</div>
             </div>
           </div>
         </div>

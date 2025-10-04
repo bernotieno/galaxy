@@ -29,3 +29,23 @@ export const fetchCrops = async (): Promise<Record<string, CropInfo>> => {
   const response = await api.get('/crops');
   return response.data;
 };
+
+export const fetchDataSources = async () => {
+  const response = await api.get('/data-sources');
+  return response.data;
+};
+
+export const fetchWeatherEvents = async () => {
+  const response = await api.get('/weather-events');
+  return response.data;
+};
+
+export const fetchTutorials = async () => {
+  const response = await api.get('/tutorials');
+  return response.data;
+};
+
+export const fetchSustainability = async () => {
+  const response = await api.get('/sustainability');
+  return response.data;
+};

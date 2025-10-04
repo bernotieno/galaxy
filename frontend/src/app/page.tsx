@@ -19,6 +19,7 @@ import InteractiveFarmGrid from '@/components/InteractiveFarmGrid';
 import InteractiveDataDashboard from '@/components/InteractiveDataDashboard';
 import GameNotifications from '@/components/GameNotifications';
 import InteractiveWeatherWidget from '@/components/InteractiveWeatherWidget';
+import DataSourceStatus from '@/components/DataSourceStatus';
 
 export default function Home() {
   const [nasaData, setNasaData] = useState<NASAData | null>(null);
@@ -173,6 +174,8 @@ export default function Home() {
               <SustainabilityDashboard />
               <WeatherEvents />
             </div>
+            
+            <DataSourceStatus />
             
             <LivestockManager 
               livestock={gameState.livestock || []}

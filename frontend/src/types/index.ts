@@ -5,6 +5,14 @@ export interface NASAData {
   precipitation: PrecipitationData;
   timestamp: string;
   coordinates: Coordinates;
+  location: LocationInfo;
+}
+
+export interface LocationInfo {
+  city: string;
+  region: string;
+  country: string;
+  zone: string;
 }
 
 export interface WeatherData {
