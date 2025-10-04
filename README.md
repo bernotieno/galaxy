@@ -18,10 +18,23 @@ A modern educational farming simulation game with Go backend and Next.js fronten
 ### Backend Setup
 ```bash
 cd backend
+
+# Install dependencies
 go mod tidy
+
+# Copy environment template
+cp .env.example .env
+
+# Add your API keys to .env file
+# Get OpenWeatherMap key: https://openweathermap.org/api
+# Get NASA Earthdata account: https://urs.earthdata.nasa.gov/
+
+# Run server
 go run main.go
 ```
 Server runs on http://localhost:8080
+
+**Note**: Without API keys, the system uses enhanced simulation with realistic patterns.
 
 ### Frontend Setup
 ```bash
@@ -45,14 +58,26 @@ Frontend runs on http://localhost:3000
 - **Resource Management**: Budget and scoring system
 - **Data-Driven Decisions**: AI recommendations based on NASA data
 
-## 🛰️ NASA Data Sources (Simulated)
+## 🛰️ Real NASA Data Integration
 
-| Mission | Data Type | Resolution | Purpose |
-|---------|-----------|------------|---------|
-| MODIS/VIIRS | Weather | Regional | Temperature, humidity |
-| SMAP | Soil Moisture | 36km | Surface and root zone moisture |
-| Landsat/MODIS | Vegetation | 250m | NDVI, vegetation health |
-| GPM | Precipitation | 10km | Rainfall measurements |
+| Data Source | API/Service | Resolution | Status |
+|-------------|-------------|------------|--------|
+| **Weather** | OpenWeatherMap API | Point | ✅ Real-time |
+| **Soil Moisture** | NASA SMAP via AppEEARS | 36km | ✅ Real NASA data |
+| **Vegetation** | MODIS via Giovanni | 250m-1km | ✅ Real NASA data |
+| **Precipitation** | GPM IMERG + NOAA | 10km | ✅ Real NASA data |
+
+### 🔑 API Setup Required
+
+1. **OpenWeatherMap** (Free): [Get API key](https://openweathermap.org/api)
+2. **NASA Earthdata** (Free): [Create account](https://urs.earthdata.nasa.gov/)
+3. **AppEEARS Token**: [Generate token](https://appeears.earthdatacloud.nasa.gov/)
+
+Add your keys to `backend/.env`:
+```bash
+OPENWEATHER_API_KEY=your_key_here
+EARTHDATA_TOKEN=your_token_here
+```
 
 ## 📊 API Endpoints
 
@@ -88,7 +113,8 @@ Perform farming action
 ```
 lake_galaxy/
 ├── backend/
-│   ├── main.go          # Go server with NASA data simulation
+│   ├── main.go          # Go server with real NASA APIs
+│   ├── .env             # API keys (create from .env.example)
 │   └── go.mod           # Go dependencies
 └── frontend/
     ├── src/
@@ -100,18 +126,40 @@ lake_galaxy/
     └── next.config.js   # API proxy configuration
 ```
 
+### Real NASA Data Sources
+
+- **OpenWeatherMap**: Real-time weather conditions
+- **NASA AppEEARS**: SMAP soil moisture data
+- **NASA Giovanni**: MODIS vegetation indices (NDVI, EVI, LAI)
+- **NASA GPM**: Global precipitation measurements
+- **NOAA Weather**: US precipitation forecasts
+- **USDA Web Soil Survey**: Soil properties proxy
+
 ### Key Components
 - **FarmGrid**: Interactive plot management
 - **DataDashboard**: NASA data visualization
 - **GameHeader**: Score and budget display
 
-## 🌱 Future Enhancements
+## 🌱 Current Features
 
-- Real NASA API integration
+✅ **Real NASA API Integration**
+- Live weather data from OpenWeatherMap
+- SMAP soil moisture via AppEEARS
+- MODIS vegetation health via Giovanni
+- GPM precipitation via Giovanni + NOAA
+
+✅ **Enhanced Simulation Fallbacks**
+- Realistic climate patterns when APIs unavailable
+- Geographic and seasonal variations
+- Educational value maintained
+
+## 🚀 Future Enhancements
+
 - WebSocket for real-time updates
-- Advanced crop modeling
-- Multiplayer functionality
-- Historical data analysis
+- Historical NASA data analysis
+- Advanced crop modeling with ML
+- Multiplayer farming challenges
+- Integration with more NASA datasets
 
 ## 📚 Learning Resources
 
