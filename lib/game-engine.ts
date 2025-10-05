@@ -420,7 +420,12 @@ export class FarmGameEngine {
 
         this.state.weather.temperature = Math.max(-20, Math.min(50, temperature))
         this.state.weather.precipitation = Math.max(0, latestWeather.precipitation)
-        this.state.weather.forecast = weatherData.slice(-7) // Keep last 7 days
+        this.state.weather.forecast = weatherData.slice(-7).map(data => ({
+          day: data.date,
+          temp: data.temperature,
+          precipitation: data.precipitation,
+          condition: data.temperature > 25 ? 'sunny' : data.precipitation > 0.1 ? 'rainy' : 'cloudy'
+        }))
 
         console.log('[Game Engine] Updated weather:', {
           temperature: this.state.weather.temperature,
@@ -467,7 +472,12 @@ export class FarmGameEngine {
       if (weatherData.length > 0) {
         this.state.weather.temperature = weatherData[0].temperature
         this.state.weather.precipitation = weatherData[0].precipitation
-        this.state.weather.forecast = weatherData
+        this.state.weather.forecast = weatherData.slice(-7).map(data => ({
+          day: data.date,
+          temp: data.temperature,
+          precipitation: data.precipitation,
+          condition: data.temperature > 25 ? 'sunny' : data.precipitation > 0.1 ? 'rainy' : 'cloudy'
+        }))
       }
 
       this.notifyListeners()

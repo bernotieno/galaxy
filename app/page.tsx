@@ -173,11 +173,8 @@ function GameContent() {
     <div className="min-h-screen">
       {/* Clean Header */}
       <GameHUD
-        gameState={state}
         onUpdateNASAData={updateWithNASAData}
         onStartTutorial={handleStartTutorial}
-        playerLevel={Math.floor(state.score.cropYield / 100) + 1}
-        playerXP={state.score.cropYield % 100}
       />
 
       {/* Main Content */}

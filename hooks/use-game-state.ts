@@ -12,7 +12,9 @@ export function useGameState() {
       setState(newState)
     })
 
-    return unsubscribe
+    return () => {
+      unsubscribe()
+    }
   }, [])
 
   return {

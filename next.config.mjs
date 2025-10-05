@@ -5,7 +5,7 @@ const nextConfig = {
     ignoreDuringBuilds: false, // Enable ESLint in production builds
   },
   typescript: {
-    ignoreBuildErrors: true, // Temporarily disable TypeScript checking for production build
+    ignoreBuildErrors: false, // Enable TypeScript checking for production build
   },
   images: {
     domains: ['worldview.earthdata.nasa.gov'], // Allow NASA Worldview images
