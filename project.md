@@ -493,3 +493,19 @@ const apiRequest = async (url, options, retries = 3) => {
 - LP DAAC User Services: LPDAAC@usgs.gov
 - Earthdata Support: support@earthdata.nasa.gov
 - API Issues: Report via [Earthdata Forum](https://forum.earthdata.nasa.gov/)
+
+
+NASA_EARTHDATA_USERNAME=sirokumu
+NASA_EARTHDATA_PASSWORD=Jerepauline@254
+
+NASA_API_KEY=nplOmhJHMhza5xZ3kuVcsqW3ybbAiJrv2yUk7bAa
+
+NASA_URS_BASE_URL=https://urs.earthdata.nasa.gov
+NASA_APPEEARS_BASE_URL=https://appeears.earthdatacloud.nasa.gov/api
+NASA_WORLDVIEW_BASE_URL=https://worldview.earthdata.nasa.gov
+
+DEFAULT_FARM_LATITUDE=40.7128
+DEFAULT_FARM_LONGITUDE=-74.006
+DEFAULT_FARM_BBOX=-74.1,40.6,-73.9,40.8
+
+NODE_ENV=production
