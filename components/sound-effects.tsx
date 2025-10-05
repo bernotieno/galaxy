@@ -126,7 +126,7 @@ interface SoundEffectsProps {
 }
 
 export function SoundEffectsProvider({ children }: SoundEffectsProps) {
-  const soundManager = useRef<SoundManager>()
+  const soundManager = useRef<SoundManager | null>(null)
 
   useEffect(() => {
     soundManager.current = SoundManager.getInstance()
@@ -137,7 +137,7 @@ export function SoundEffectsProvider({ children }: SoundEffectsProps) {
 
 // Hook for using sound effects
 export function useSoundEffects() {
-  const soundManager = useRef<SoundManager>()
+  const soundManager = useRef<SoundManager | null>(null)
 
   useEffect(() => {
     soundManager.current = SoundManager.getInstance()
