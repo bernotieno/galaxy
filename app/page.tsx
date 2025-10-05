@@ -92,10 +92,12 @@ export default function GeoHarvestLanding() {
               {mounted && theme === "dark" ? <Sun className="size-[18px]" /> : <Moon className="size-[18px]" />}
               <span className="sr-only">Toggle theme</span>
             </Button> */}
-            <Button className="rounded-full bg-[hsl(45,100%,55%)] text-[hsl(220,40%,8%)] hover:bg-[hsl(45,100%,50%)] font-bold shadow-lg">
-              <Gamepad2 className="size-4 mr-2" />
-              Play Now
-            </Button>
+            <Link href="https://lakegalaxygame.onrender.com/" target="_blank">
+              <Button className="rounded-full bg-[hsl(45,100%,55%)] text-[hsl(220,40%,8%)] hover:bg-[hsl(45,100%,50%)] font-bold shadow-lg">
+                <Gamepad2 className="size-4 mr-2" />
+                Play Now
+              </Button>
+            </Link>
           </div>
 
           <Button variant="ghost" size="icon" onClick={() => setMobileMenuOpen(!mobileMenuOpen)} className="md:hidden">
@@ -138,10 +140,12 @@ export default function GeoHarvestLanding() {
               >
                 Leaderboard
               </Link>
-              <Button className="w-full rounded-full bg-[hsl(45,100%,55%)] text-[hsl(220,40%,8%)] hover:bg-[hsl(45,100%,50%)] font-bold shadow-lg">
-                <Gamepad2 className="size-4 mr-2" />
-                Play Now
-              </Button>
+              <Link href="https://lakegalaxygame.onrender.com/" target="_blank">
+                <Button className="w-full rounded-full bg-[hsl(45,100%,55%)] text-[hsl(220,40%,8%)] hover:bg-[hsl(45,100%,50%)] font-bold shadow-lg">
+                  <Gamepad2 className="size-4 mr-2" />
+                  Play Now
+                </Button>
+              </Link>
             </div>
           </motion.div>
         )}
@@ -175,13 +179,15 @@ export default function GeoHarvestLanding() {
                 decision matters in this epic farming adventure!
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-                <Button
-                  size="lg"
-                  className="rounded-full h-14 px-10 text-lg bg-[hsl(45,100%,55%)] text-[hsl(220,40%,8%)] hover:bg-[hsl(45,100%,50%)] font-bold shadow-lg"
-                >
-                  <Gamepad2 className="size-5 mr-2" />
-                  START PLAYING NOW
-                </Button>
+                <Link href="https://lakegalaxygame.onrender.com/" target="_blank">
+                  <Button
+                    size="lg"
+                    className="rounded-full h-14 px-10 text-lg bg-[hsl(45,100%,55%)] text-[hsl(220,40%,8%)] hover:bg-[hsl(45,100%,50%)] font-bold shadow-lg"
+                  >
+                    <Gamepad2 className="size-5 mr-2" />
+                    START PLAYING NOW
+                  </Button>
+                </Link>
                 {/* <Button
                   size="lg"
                   variant="outline"
@@ -536,13 +542,15 @@ export default function GeoHarvestLanding() {
                 Join thousands of players building sustainable farms with real NASA data. Your adventure starts NOW!
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-                <Button
-                  size="lg"
-                  className="rounded-full h-16 px-12 text-xl bg-[hsl(45,100%,55%)] text-[hsl(220,40%,8%)] hover:bg-[hsl(45,100%,50%)] font-bold shadow-2xl"
-                >
-                  <Gamepad2 className="size-6 mr-2" />
-                  START YOUR FARM NOW
-                </Button>
+                <Link href="https://lakegalaxygame.onrender.com/" target="_blank">
+                  <Button
+                    size="lg"
+                    className="rounded-full h-16 px-12 text-xl bg-[hsl(45,100%,55%)] text-[hsl(220,40%,8%)] hover:bg-[hsl(45,100%,50%)] font-bold shadow-2xl"
+                  >
+                    <Gamepad2 className="size-6 mr-2" />
+                    START YOUR FARM NOW
+                  </Button>
+                </Link>
                 <p className="text-sm text-muted-foreground">⚡ Play instantly in your browser</p>
               </div>
             </motion.div>
