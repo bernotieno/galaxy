@@ -180,7 +180,6 @@ export class FarmGameEngine {
     }
 
     const crop = cell.crop
-    const cropData = CROP_DATA[crop.type]
 
     // Calculate crop yield based on health and growth
     const baseYield = 100

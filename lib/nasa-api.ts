@@ -1,7 +1,7 @@
 // NASA API Integration Layer
 // Handles authentication and data fetching from NASA Earth observation APIs
 
-import { getNASACredentials, getNASAAPIConfig } from './env'
+import { getNASACredentials } from './env'
 
 export interface Coordinates {
   latitude: number
@@ -30,6 +30,21 @@ export interface WeatherData {
   temperature: number
   precipitation: number
   coordinates: Coordinates
+}
+
+interface AppEEARSTaskStatus {
+  status: 'pending' | 'processing' | 'done' | 'error'
+  [key: string]: unknown
+}
+
+interface AppEEARSDataItem {
+  Date: string
+  Latitude: number
+  Longitude: number
+  MOD_Grid_MOD15A2H_Lai_500m?: number
+  MOD13Q1_061_250m_16_days_NDVI?: number
+  MOD11A2_061_LST_Day_1km?: number
+  [key: string]: unknown
 }
 
 class NASAAPIManager {
@@ -306,7 +321,7 @@ class NASAAPIManager {
   }
 
   // Poll task status until complete
-  private async pollTaskStatus(taskId: string, maxAttempts = 30): Promise<any> {
+  private async pollTaskStatus(taskId: string, maxAttempts = 30): Promise<AppEEARSDataItem[]> {
     for (let i = 0; i < maxAttempts; i++) {
       const response = await fetch(`${this.baseURL}/task/${taskId}`, {
         headers: {
@@ -314,7 +329,7 @@ class NASAAPIManager {
         },
       })
 
-      const data = await response.json()
+      const data = await response.json() as AppEEARSTaskStatus
 
       if (data.status === "done") {
         // Download results
@@ -324,7 +339,7 @@ class NASAAPIManager {
           },
         })
 
-        return await resultsResponse.json()
+        return await resultsResponse.json() as AppEEARSDataItem[]
       }
 
       if (data.status === "error") {
@@ -339,10 +354,10 @@ class NASAAPIManager {
   }
 
   // Parse soil moisture results
-  private parseSoilMoistureResults(results: any): SoilMoistureData[] {
+  private parseSoilMoistureResults(results: AppEEARSDataItem[]): SoilMoistureData[] {
     // Parse the results from AppEEARS format
     // This is a simplified version - actual parsing would depend on response format
-    return results.map((item: any) => ({
+    return results.map((item: AppEEARSDataItem) => ({
       date: item.Date,
       value: item.MOD_Grid_MOD15A2H_Lai_500m || 0,
       coordinates: {
@@ -353,8 +368,8 @@ class NASAAPIManager {
   }
 
   // Parse vegetation results
-  private parseVegetationResults(results: any): VegetationData[] {
-    return results.map((item: any) => ({
+  private parseVegetationResults(results: AppEEARSDataItem[]): VegetationData[] {
+    return results.map((item: AppEEARSDataItem) => ({
       date: item.Date,
       ndvi: item.MOD13Q1_061_250m_16_days_NDVI || 0,
       coordinates: {
@@ -365,8 +380,8 @@ class NASAAPIManager {
   }
 
   // Parse temperature results
-  private parseTemperatureResults(results: any): WeatherData[] {
-    return results.map((item: any) => ({
+  private parseTemperatureResults(results: AppEEARSDataItem[]): WeatherData[] {
+    return results.map((item: AppEEARSDataItem) => ({
       date: item.Date,
       temperature: item.MOD11A2_061_LST_Day_1km || 0,
       precipitation: 0, // Would need additional API call for precipitation

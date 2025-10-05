@@ -37,7 +37,7 @@ export function WeatherWidget({ gameState }: WeatherWidgetProps) {
   // Generate weather forecast (mock data for now)
   const generateForecast = () => {
     const days = ['Today', 'Tomorrow', 'Day 3', 'Day 4', 'Day 5']
-    return days.map((day, index) => ({
+    return days.map((day) => ({
       day,
       temp: weather.temperature + (Math.random() - 0.5) * 6,
       precipitation: Math.random() * 20,

@@ -25,7 +25,7 @@ export function EducationalContent() {
       >
         <div className="space-y-4">
           <p className="text-sm">
-            NASA operates multiple satellites that continuously monitor Earth's surface, providing valuable data for
+            NASA operates multiple satellites that continuously monitor Earth&apos;s surface, providing valuable data for
             farmers worldwide. This data helps optimize crop yields while protecting the environment.
           </p>
 
@@ -52,7 +52,7 @@ export function EducationalContent() {
               <AccordionContent className="text-sm space-y-2">
                 <p>
                   MODIS (Moderate Resolution Imaging Spectroradiometer) aboard Terra and Aqua satellites captures images
-                  of Earth's entire surface every 1-2 days.
+                  of Earth&apos;s entire surface every 1-2 days.
                 </p>
                 <p className="font-medium">Key measurements:</p>
                 <ul className="list-disc list-inside space-y-1 text-muted-foreground">
@@ -69,7 +69,7 @@ export function EducationalContent() {
               <AccordionContent className="text-sm space-y-2">
                 <p>
                   The Landsat program has been collecting Earth imagery since 1972, providing the longest continuous
-                  record of Earth's surface from space.
+                  record of Earth&apos;s surface from space.
                 </p>
                 <p className="font-medium">Applications:</p>
                 <ul className="list-disc list-inside space-y-1 text-muted-foreground">
@@ -200,7 +200,7 @@ export function EducationalContent() {
       >
         <div className="space-y-4">
           <p className="text-sm">
-            Sustainable farming meets current food needs without compromising future generations' ability to produce
+            Sustainable farming meets current food needs without compromising future generations&apos; ability to produce
             food. NASA data helps farmers achieve this balance.
           </p>
 
@@ -264,7 +264,7 @@ export function EducationalContent() {
       >
         <div className="space-y-4">
           <p className="text-sm">
-            Climate change is altering growing seasons, precipitation patterns, and temperature ranges. NASA's Earth
+            Climate change is altering growing seasons, precipitation patterns, and temperature ranges. NASA&apos;s Earth
             observation systems help farmers adapt to these changes.
           </p>
 
@@ -304,9 +304,9 @@ export function EducationalContent() {
           </div>
 
           <div className="p-4 bg-muted rounded-lg">
-            <p className="text-sm font-semibold mb-2">NASA's Role:</p>
+            <p className="text-sm font-semibold mb-2">NASA&apos;s Role:</p>
             <p className="text-sm text-muted-foreground">
-              NASA's Earth observation satellites provide critical data for climate models, helping predict future
+              NASA&apos;s Earth observation satellites provide critical data for climate models, helping predict future
               conditions and enabling farmers to make informed long-term decisions about crop selection and land
               management.
             </p>

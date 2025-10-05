@@ -160,7 +160,7 @@ export function SatelliteDashboard() {
               <div className="text-sm text-muted-foreground space-y-1">
                 <p className="font-semibold">About Soil Moisture Data:</p>
                 <p>
-                  Data from NASA's SMAP (Soil Moisture Active Passive) satellite. Optimal range for most crops is
+                  Data from NASA&apos;s SMAP (Soil Moisture Active Passive) satellite. Optimal range for most crops is
                   30-50%.
                 </p>
                 <p>Below 20% indicates drought stress. Above 60% may indicate waterlogging.</p>

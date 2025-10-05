@@ -1,48 +1,19 @@
 "use client"
 
-import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
-import { Badge } from "@/components/ui/badge"
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { GameSettings } from "@/components/game-settings"
 import { TutorialTrigger } from "@/components/onboarding-tutorial"
-import type { GameState } from "@/lib/game-types"
-import {
-  Satellite,
-  User,
-  Star,
-  Zap,
-  Crown,
-  Gamepad2
-} from "lucide-react"
+import { Satellite } from "lucide-react"
 
 interface GameHUDProps {
-  gameState: GameState
   onUpdateNASAData: () => void
   onStartTutorial: () => void
-  playerLevel?: number
-  playerXP?: number
 }
 
-export function GameHUD({ 
-  gameState, 
-  onUpdateNASAData, 
-  onStartTutorial,
-  playerLevel = 1,
-  playerXP = 0
+export function GameHUD({
+  onUpdateNASAData,
+  onStartTutorial
 }: GameHUDProps) {
-  const [animateResources, setAnimateResources] = useState<string[]>([])
-  const { resources } = gameState
-
-  // Animate resource changes
-  useEffect(() => {
-    const timer = setTimeout(() => setAnimateResources([]), 1000)
-    return () => clearTimeout(timer)
-  }, [resources])
-
-  const triggerResourceAnimation = (resource: string) => {
-    setAnimateResources(prev => [...prev, resource])
-  }
 
   return (
     <div className="bg-black border-b border-gray-800 shadow-lg sticky top-0 z-50">

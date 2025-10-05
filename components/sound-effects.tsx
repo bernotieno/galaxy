@@ -23,7 +23,7 @@ export class SoundManager {
 
   private initAudioContext() {
     try {
-      this.audioContext = new (window.AudioContext || (window as any).webkitAudioContext)()
+      this.audioContext = new (window.AudioContext || (window as typeof window & { webkitAudioContext?: typeof AudioContext }).webkitAudioContext)()
       this.gainNode = this.audioContext.createGain()
       this.gainNode.connect(this.audioContext.destination)
       this.gainNode.gain.setValueAtTime(0.3, this.audioContext.currentTime) // Set volume to 30%

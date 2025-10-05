@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from "react"
 import { useGameState } from "@/hooks/use-game-state"
-import { FarmGrid } from "@/components/farm-grid"
 import { EnhancedFarmGrid } from "@/components/enhanced-farm-grid"
 import { CellDetails } from "@/components/cell-details"
 import { GameControls } from "@/components/game-controls"
@@ -11,25 +10,21 @@ import { GameDashboard } from "@/components/game-dashboard"
 import { WeatherWidget } from "@/components/weather-widget"
 import { SatelliteDashboard } from "@/components/satellite-dashboard"
 import { DataInsights } from "@/components/data-insights"
-import { EducationalContent } from "@/components/educational-content"
 import { NASAStatus } from "@/components/nasa-status"
-import { OnboardingTutorial, TutorialTrigger } from "@/components/onboarding-tutorial"
+import { OnboardingTutorial } from "@/components/onboarding-tutorial"
 import { GettingStartedCard } from "@/components/getting-started-card"
 import { QuickTip } from "@/components/help-tooltip"
-import { GameSettings } from "@/components/game-settings"
 import { SoundEffectsProvider, useSoundEffects } from "@/components/sound-effects"
 import { AnimatedEffectsProvider, ParticleSystem, effects, celebrate } from "@/components/animated-effects"
 import { GameHUD } from "@/components/game-hud"
-import { LocationSelector } from "@/components/location-selector"
-import { Button } from "@/components/ui/button"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Toaster } from "@/components/ui/sonner"
 import type { CropType } from "@/lib/game-types"
-import { Satellite, Tractor, BookOpen, Target, Cloud } from "lucide-react"
+import { Satellite, Tractor, Target } from "lucide-react"
 import { toast } from "sonner"
 
 function GameContent() {
-  const { state, plantCrop, irrigate, fertilize, harvestCrop, advanceDay, updateWithNASAData, changeFarmLocation } = useGameState()
+  const { state, plantCrop, irrigate, fertilize, harvestCrop, advanceDay, updateWithNASAData } = useGameState()
   const [selectedCell, setSelectedCell] = useState<{ row: number; col: number } | null>(null)
   const [showTutorial, setShowTutorial] = useState(false)
   const [showGettingStarted, setShowGettingStarted] = useState(true)
@@ -171,20 +166,6 @@ function GameContent() {
     setShowGettingStarted(false)
   }
 
-  const handleLocationChange = (locationId: string) => {
-    const success = changeFarmLocation(locationId)
-    if (success) {
-      sound.playPlantCrop() // Reuse a pleasant sound
-      toast.success("🌍 Location changed successfully!", {
-        description: `Now farming in ${state.farmLocation.name}`
-      })
-    } else {
-      sound.playError()
-      toast.error("Failed to change location", {
-        description: "Please try again"
-      })
-    }
-  }
 
   const cell = selectedCell ? state.farmGrid[selectedCell.row][selectedCell.col] : null
 

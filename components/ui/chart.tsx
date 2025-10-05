@@ -117,8 +117,7 @@ function ChartTooltipContent({
   formatter,
   color,
   nameKey,
-  labelKey,
-  ...props
+  labelKey
 }: React.ComponentProps<typeof RechartsPrimitive.Tooltip> &
   React.ComponentProps<'div'> & {
     hideLabel?: boolean
@@ -126,10 +125,10 @@ function ChartTooltipContent({
     indicator?: 'line' | 'dot' | 'dashed'
     nameKey?: string
     labelKey?: string
-    payload?: any[]
-    label?: any
-    labelFormatter?: any
-    formatter?: any
+    payload?: any[] // eslint-disable-line @typescript-eslint/no-explicit-any
+    label?: any // eslint-disable-line @typescript-eslint/no-explicit-any
+    labelFormatter?: any // eslint-disable-line @typescript-eslint/no-explicit-any
+    formatter?: any // eslint-disable-line @typescript-eslint/no-explicit-any
   }) {
   const { config } = useChart()
 

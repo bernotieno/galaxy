@@ -4,7 +4,7 @@ export const getEnvVar = (key: string, defaultValue?: string): string | undefine
   if (typeof window !== 'undefined') {
     // Client-side: only allow NEXT_PUBLIC_ variables
     if (key.startsWith('NEXT_PUBLIC_')) {
-      return (window as any).__ENV?.[key] || defaultValue
+      return (window as { __ENV?: Record<string, string> }).__ENV?.[key] || defaultValue
     }
     return defaultValue
   }

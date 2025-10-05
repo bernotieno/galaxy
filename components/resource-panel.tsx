@@ -1,11 +1,7 @@
 "use client"
 
-import { useState, useEffect } from "react"
-import { Progress } from "@/components/ui/progress"
-import { Badge } from "@/components/ui/badge"
-import { HelpTooltip } from "@/components/help-tooltip"
 import type { GameState } from "@/lib/game-types"
-import { Droplets, Sparkles, Sprout, DollarSign, Leaf, TrendingUp, Award, Zap, AlertTriangle } from "lucide-react"
+import { Droplets, Sparkles, Sprout, DollarSign, Leaf, TrendingUp, Award } from "lucide-react"
 
 interface ResourcePanelProps {
   gameState: GameState
@@ -13,32 +9,9 @@ interface ResourcePanelProps {
 
 export function ResourcePanel({ gameState }: ResourcePanelProps) {
   const { resources, score } = gameState
-  const [animatedResources, setAnimatedResources] = useState<string[]>([])
-  const [previousResources, setPreviousResources] = useState(resources)
 
   const totalSeeds = Object.values(resources.seeds).reduce((sum, count) => sum + count, 0)
 
-  // Detect resource changes and trigger animations
-  useEffect(() => {
-    const changes: string[] = []
-    if (resources.money !== previousResources.money) changes.push('money')
-    if (resources.water !== previousResources.water) changes.push('water')
-    if (resources.fertilizer !== previousResources.fertilizer) changes.push('fertilizer')
-    
-    if (changes.length > 0) {
-      setAnimatedResources(changes)
-      setTimeout(() => setAnimatedResources([]), 1000)
-    }
-    
-    setPreviousResources(resources)
-  }, [resources, previousResources])
-
-  const getResourceStatus = (current: number, max: number) => {
-    const percentage = (current / max) * 100
-    if (percentage < 20) return { status: 'critical', color: 'text-red-500', bgColor: 'bg-red-500' }
-    if (percentage < 50) return { status: 'low', color: 'text-amber-500', bgColor: 'bg-amber-500' }
-    return { status: 'good', color: 'text-green-500', bgColor: 'bg-green-500' }
-  }
 
   return (
     <div className="space-y-4">

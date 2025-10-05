@@ -13,17 +13,12 @@ import {
   Settings,
   Volume2,
   VolumeX,
-  Zap,
-  Eye,
   Gamepad2,
   Palette,
   Save,
   RotateCcw
 } from "lucide-react"
 
-interface GameSettingsProps {
-  className?: string
-}
 
 interface GameSettings {
   soundEnabled: boolean
@@ -51,7 +46,7 @@ const defaultSettings: GameSettings = {
   fastMode: false
 }
 
-export function GameSettings({ className }: GameSettingsProps) {
+export function GameSettings() {
   const [isOpen, setIsOpen] = useState(false)
   const [settings, setSettings] = useState<GameSettings>(defaultSettings)
   const [hasChanges, setHasChanges] = useState(false)
@@ -276,7 +271,7 @@ export function GameSettings({ className }: GameSettingsProps) {
                       key={level}
                       variant={settings.difficulty === level ? "default" : "outline"}
                       size="sm"
-                      onClick={() => updateSetting("difficulty", level as any)}
+                      onClick={() => updateSetting("difficulty", level as GameSettings["difficulty"])}
                       className="capitalize"
                     >
                       {level}

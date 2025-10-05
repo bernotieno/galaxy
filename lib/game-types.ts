@@ -56,7 +56,12 @@ export interface GameState {
   weather: {
     temperature: number
     precipitation: number
-    forecast: any[]
+    forecast: Array<{
+      day: string
+      temp: number
+      precipitation: number
+      condition: string
+    }>
   }
 }
 

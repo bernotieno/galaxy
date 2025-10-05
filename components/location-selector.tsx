@@ -13,7 +13,7 @@ import {
 } from "@/components/ui/dialog"
 import { Badge } from "@/components/ui/badge"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { MapPin, Globe, Thermometer, Droplets } from "lucide-react"
+import { MapPin, Globe } from "lucide-react"
 import { FARM_LOCATIONS, type FarmLocation } from "@/lib/game-types"
 
 interface LocationSelectorProps {

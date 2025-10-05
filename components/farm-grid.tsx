@@ -32,7 +32,6 @@ export function FarmGrid({ grid, onCellClick, selectedCell }: FarmGridProps) {
         {grid.map((row, rowIndex) =>
           row.map((cell, colIndex) => {
             const isSelected = selectedCell?.row === rowIndex && selectedCell?.col === colIndex
-            const moistureLevel = Math.floor(cell.soilMoisture * 100)
 
             return (
               <button

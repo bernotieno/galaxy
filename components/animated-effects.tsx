@@ -41,7 +41,7 @@ export function AnimatedEffectsProvider({ className }: AnimatedEffectsProps) {
 
   // Expose addEffect globally
   useEffect(() => {
-    ;(window as any).addFloatingEffect = addEffect
+    ;(window as typeof window & { addFloatingEffect?: typeof addEffect }).addFloatingEffect = addEffect
   }, [])
 
   const getEffectIcon = (type: FloatingEffect["type"]) => {
@@ -137,7 +137,7 @@ export const triggerFloatingEffect = (
     y = rect.top + rect.height / 2
   }
 
-  ;(window as any).addFloatingEffect?.({
+  ;(window as typeof window & { addFloatingEffect?: (effect: Omit<FloatingEffect, "id" | "timestamp">) => void }).addFloatingEffect?.({
     type,
     value,
     x: x + (Math.random() - 0.5) * 40, // Add some randomness
@@ -220,7 +220,7 @@ export function ParticleSystem({ className }: { className?: string }) {
 
   // Expose particle creation globally
   useEffect(() => {
-    ;(window as any).createParticles = createParticles
+    ;(window as typeof window & { createParticles?: typeof createParticles }).createParticles = createParticles
   }, [])
 
   return (
@@ -260,7 +260,7 @@ export const celebrate = (element?: HTMLElement) => {
   const colors = ['#FFD700', '#FF6B6B', '#4ECDC4', '#45B7D1', '#96CEB4', '#FFEAA7']
   colors.forEach((color, index) => {
     setTimeout(() => {
-      ;(window as any).createParticles?.(x, y, 10, color)
+      ;(window as typeof window & { createParticles?: (x: number, y: number, count: number, color: string) => void }).createParticles?.(x, y, 10, color)
     }, index * 50)
   })
 }
