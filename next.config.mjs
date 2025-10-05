@@ -7,6 +7,15 @@ const nextConfig = {
   typescript: {
     ignoreBuildErrors: false, // Enable TypeScript checking for production build
   },
+  
+  // Webpack configuration for better module resolution
+  webpack: (config) => {
+    config.resolve.alias = {
+      ...config.resolve.alias,
+      '@': '.',
+    }
+    return config
+  },
   images: {
     domains: ['worldview.earthdata.nasa.gov'], // Allow NASA Worldview images
     unoptimized: false, // Enable image optimization for production
