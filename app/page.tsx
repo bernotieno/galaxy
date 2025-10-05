@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react"
 import { useGameState } from "@/hooks/use-game-state"
-import { EnhancedFarmGrid } from "@/components/enhanced-farm-grid"
+import { FarmGrid } from "@/components/farm-grid"
 import { CellDetails } from "@/components/cell-details"
 import { GameControls } from "@/components/game-controls"
 import { ResourcePanel } from "@/components/resource-panel"
@@ -258,7 +258,7 @@ function GameContent() {
             <div className="grid xl:grid-cols-4 lg:grid-cols-3 gap-6">
               <div className="xl:col-span-3 lg:col-span-2 space-y-6">
                 <div className="gaming-card rounded-xl p-6 glow-cyan">
-                  <EnhancedFarmGrid grid={state.farmGrid} onCellClick={handleCellClick} selectedCell={selectedCell} />
+                  <FarmGrid grid={state.farmGrid} onCellClick={handleCellClick} selectedCell={selectedCell} />
                 </div>
                 <div className="gaming-card rounded-xl p-6 glow-green">
                   <GameControls
