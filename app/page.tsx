@@ -104,7 +104,7 @@ function GameContent() {
         sound.playHarvestCrop()
         effects.money(earnings)
         celebrate()
-        toast.success(`🌾 Harvest successful! +$${earnings}`, {
+        toast.success(`🌾 Harvest successful! +${earnings}`, {
           description: `Cell (${selectedCell.row}, ${selectedCell.col}) is now ready for replanting`
         })
       } else {
